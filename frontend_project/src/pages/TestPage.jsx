@@ -6,6 +6,10 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { getDoc } from "firebase/firestore";
+
+import HandleGetData from "../components/GetAllMonsterData";
+import HandleSendData from "../components/sendNewMonster";
+import Uploadimage from "../components/UploadImage";
 // import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 const TestPage = () => {
@@ -98,79 +102,148 @@ const TestPage = () => {
     setIsLoading(false);
   };
 
-//   //画像をアップする関数
-//   function sendImage() {
-//     // nullチェック
-//     const title = titleTextField.value;
-//     const content = contentTextField.value;
-//     const selectImage = imageView.src;
+  //   const [userId, setUserId] = useState("");
+  const HandleSendtData = async (e) => {
+    e.preventDefault();
+    const auth = getAuth();
+    const user = auth.currentUser;
 
-//     if (title && content && selectImage) {
-//       // 今日の日付を使用してユニークな名前を生成
-//       const imageName = `${Date.now()}.jpg`;
-//       // 今回は"posts"というフォルダーに画像を保存する
-//       const reference = firebase.storage().ref().child(`posts/${imageName}`);
-//       // 画像データのサイズを調整
-//       const canvas = document.createElement("canvas");
-//       const context = canvas.getContext("2d");
-//       const image = new Image();
+    if (user) {
+      console.log(user.uid);
+      try {
+        // Firestoreにデータを格納
+        await updateDoc(doc(database, user.uid, "Monster1"), {
+          name: "Name",
+          gender: "male",
+          hobby: "hobby",
+          rate: "rubbit",
+          _logInput: { 1: "1だよ", 2: "2だよ", 3: "3だぜ" },
+          _logOutput: { 1: "1でkぢあ", 2: "2だあああ", 3: "3aaa" },
+          num_response: 3,
+        }).then(setIsCompleted(false));
+        // navigate("/talk", { state: { selectedFile } });
+      } catch (error) {
+        console.error(
+          "Firestoreからのデータ取得時にエラーが発生しました。",
+          error
+        );
+        setErrorMessages(error.message);
+      }
+    } else {
+      setErrorMessages("サインインしていません。");
+    }
+    setIsLoading(false);
+  };
 
-//       image.src = selectImage;
-//       image.onload = function () {
-//         canvas.width = image.width;
-//         canvas.height = image.height;
-//         context.drawImage(image, 0, 0, image.width, image.height);
-//         const imageData = canvas.toDataURL("image/jpeg", 0.8).split(",")[1];
+  const inputData  ={
+    monsterId: "0",
+    name: "test",
+    age: "13331",
+    gender: "male",
+    hobby: "volleyball",
+    race: "rabit",
+    _logInput: ["よろしくね", "おいのび太、お前はもう死んでいる"],
+    _logOutput: ["こんにちは"],
+    num_response: "1",
+    image_url: "https://firebasestorage.googleapis.com/v0/b/monster-ai.appspot.com/o/monster%2Fmonster1.jpg?alt=media&token=3b7b5b1a-4b0a-4b0a-8b0a-4b0a4b0a4b0a"
+  }
 
-//         // メタデータを設定
-//         const metadata = { contentType: "image/jpeg" };
+  const sendData = async () => {
+    await HandleSendData(inputData);
+  };
 
-//         // storageへの保存を行う
-//         reference
-//           .putString(imageData, "base64", metadata)
-//           .then(() => {
-//             // storageへの保存が成功した場合はdownloadURLの取得を行う
-//             reference
-//               .getDownloadURL()
-//               .then((url) => {
-//                 // downloadURLの取得が成功した場合
-//                 // 文字列に変換する
-//                 const downloadUrlStr = url;
-//                 // firestoreへの保存を行う
-//                 firebase
-//                   .firestore()
-//                   .collection("posts")
-//                   .add({
-//                     title: title,
-//                     content: content,
-//                     imageURL: downloadUrlStr,
-//                     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-//                   })
-//                   .then(() => {
-//                     // firestoreへの保存が成功した場合
-//                   })
-//                   .catch((error) => {
-//                     // firestoreへの保存が失敗した場合
-//                   });
-//               })
-//               .catch((error) => {
-//                 // downloadURLの取得が失敗した場合の処理
-//               });
-//           })
-//           .catch((error) => {
-//             // storageの保存が失敗した場合の処理
-//           });
-//       };
-//     }
-//   }
+  const getMonsterData = async () => {
+    try{
+    const getData =   await HandleGetData();
+    console.log(getData);
+    }catch(error){
+        console.log("TestPage.jsxでエラー発生");
+      console.log(error);
+    }
+  };
+
+  const handleUploadImage = async () => {
+    await Uploadimage();
+  };
+
+  //   //画像をアップする関数
+  //   function sendImage() {
+  //     // nullチェック
+  //     const title = titleTextField.value;
+  //     const content = contentTextField.value;
+  //     const selectImage = imageView.src;
+
+  //     if (title && content && selectImage) {
+  //       // 今日の日付を使用してユニークな名前を生成
+  //       const imageName = `${Date.now()}.jpg`;
+  //       // 今回は"posts"というフォルダーに画像を保存する
+  //       const reference = firebase.storage().ref().child(`posts/${imageName}`);
+  //       // 画像データのサイズを調整
+  //       const canvas = document.createElement("canvas");
+  //       const context = canvas.getContext("2d");
+  //       const image = new Image();
+
+  //       image.src = selectImage;
+  //       image.onload = function () {
+  //         canvas.width = image.width;
+  //         canvas.height = image.height;
+  //         context.drawImage(image, 0, 0, image.width, image.height);
+  //         const imageData = canvas.toDataURL("image/jpeg", 0.8).split(",")[1];
+
+  //         // メタデータを設定
+  //         const metadata = { contentType: "image/jpeg" };
+
+  //         // storageへの保存を行う
+  //         reference
+  //           .putString(imageData, "base64", metadata)
+  //           .then(() => {
+  //             // storageへの保存が成功した場合はdownloadURLの取得を行う
+  //             reference
+  //               .getDownloadURL()
+  //               .then((url) => {
+  //                 // downloadURLの取得が成功した場合
+  //                 // 文字列に変換する
+  //                 const downloadUrlStr = url;
+  //                 // firestoreへの保存を行う
+  //                 firebase
+  //                   .firestore()
+  //                   .collection("posts")
+  //                   .add({
+  //                     title: title,
+  //                     content: content,
+  //                     imageURL: downloadUrlStr,
+  //                     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+  //                   })
+  //                   .then(() => {
+  //                     // firestoreへの保存が成功した場合
+  //                   })
+  //                   .catch((error) => {
+  //                     // firestoreへの保存が失敗した場合
+  //                   });
+  //               })
+  //               .catch((error) => {
+  //                 // downloadURLの取得が失敗した場合の処理
+  //               });
+  //           })
+  //           .catch((error) => {
+  //             // storageの保存が失敗した場合の処理
+  //           });
+  //       };
+  //     }
+  //   }
 
   return (
     <div>
       {isCompleted && <Navigate to="/talk" replace />}
       <button onClick={sendFirestore}>Firestoreに送る</button>
       <button onClick={getFirestore}>Firestoreからデータを受け取る</button>
+      <button onClick={HandleSendtData}>データを送る</button>
+      <button onClick={sendData}>フォーマット指定でデータを送る</button>
+      <button onClick={getMonsterData}>モンスターデータの取得</button>
       {/* <button onClick={sendImage}>Storageに画像を送信</button> */}
       <button onClick={getUid}>ユーザーIDの取得</button>
+      <button onClick={getMonsterData}>モンスターデータの取得</button>
+      <button onClick={handleUploadImage}>画像のアップロード</button>
       {isLoading && <CircularProgress />}
       {/*グルグルマーク*/} <CircularProgress />
       <h3>{errorMessages}</h3>
