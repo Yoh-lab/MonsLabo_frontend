@@ -152,6 +152,8 @@ const TestPage = () => {
     await HandleSendData(inputData);
   };
 
+
+  
   const getMonsterData = async () => {
     try{
     const getData =   await HandleGetData();
@@ -161,6 +163,8 @@ const TestPage = () => {
       console.log(error);
     }
   };
+
+
 
   const handleUploadImage = async () => {
     await Uploadimage();

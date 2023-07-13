@@ -1,84 +1,22 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
-import { database } from "../firebase/firebase";
-import { getAuth } from "firebase/auth";
-import { useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import HandleGetData from "../components/GetAllMonsterData";
 
 const SelectMonsterPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  // const [isCompleted, setIsCompleted] = useState(false);
-  const [userId, setUserId] = useState("");
-  const [responseMessages, setResponseMessages] = useState("");
-  const [errorMessages, setErrorMessages] = useState("");
+  const [getData, setGetData] = useState(null);
+  // const [showModal, setShowModal] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
-  const HandleGetData = async (e) => {
-    e.preventDefault();
-    const auth = getAuth();
-    const user = auth.currentUser;
+  useEffect(() => {
+    const fetchDataAndSetData = async () => {
+      const data = await HandleGetData();
+      setGetData(data);
+      console.log(data);
+    };
 
-    if (user) {
-      console.log(user.uid);
-      setResponseMessages(user.uid);
-      setUserId(user.uid);
-
-
-      try {
-        // Firestoreにデータを格納
-        const docRef = doc(database, user.uid, "Monster1");
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          // setResponseMessages(docSnap.data());
-          // console.log("Document data:", docSnap.data());
-          console.log(docSnap.data());
-          // setErrorMessages(docSnap.data());
-        } else {
-          // docSnap.data() will be undefined in this case
-          setErrorMessages("No such document!");
-        }
-        // navigate("/talk", { state: { selectedFile } });
-      } catch (error) {
-        console.error(
-          "Firestoreからのデータ取得時にエラーが発生しました。",
-          error
-        );
-        setErrorMessages(error.message);
-      }
-    } else {
-      setErrorMessages("サインインしていません。");
-    }
-    setIsLoading(false);
-  };
-
-  // const getFirestore = async () => {
-  //   console.log("test Log");
-  //   setIsLoading(true);
-
-  //   try {
-  //     // Firestoreにデータを格納
-  //     const docRef = doc(database, userId);
-  //     const docSnap = await getDoc(docRef);
-  //     console.log("Document data:");
-  //     if (docSnap.exists()) {
-  //       console.log("Document data:");
-  //       console.log(docSnap.data());
-  //       // setErrorMessages(docSnap.data());
-  //     } else {
-  //       // docSnap.data() will be undefined in this case
-  //       setErrorMessages("No such document!");
-  //     }
-  //     // navigate("/talk", { state: { selectedFile } });
-  //   } catch (error) {
-  //     console.error(
-  //       "Firestoreからのデータ取得時にエラーが発生しました。",
-  //       error
-  //     );
-  //     setErrorMessages(error.message);
-  //   }
-  //   setIsLoading(false);
-  // };
-
-
+    fetchDataAndSetData();
+  }, []);
 
   const navigate = useNavigate();
   const handleToTalk = () => {
@@ -91,9 +29,70 @@ const SelectMonsterPage = () => {
     navigate("/selectMode");
   };
 
+
+  //   const handleModalOpen = (id) => {
+  //   setSelectedId(id);
+  //   setShowModal(true);
+  // };
+
+  // const handleModalClose = () => {
+  //   setShowModal(false);
+  // };  
+
+  // const [slectedId, setSelectedId] = useState(0);
+  // const handleRegister = async (event) => {
+  //   event.preventDefault();
+  //   setIsLoading(true);
+  //   try {
+  //     navigate("/talk", {
+  //       state: {
+  //         selectedFile: getData[slectedId].image_url,
+  //         monsterId: String(slectedId),
+  //         name: getData[slectedId].name,
+  //         age: String(getData[slectedId].age),
+  //         gender: getData[slectedId].image_url,
+  //         hobby: getData[slectedId].hobby,
+  //         race: getData[slectedId].race,
+  //         _logInput: getData[slectedId]._logInput,
+  //         _logOutput: getData[slectedId]._logOutput,
+  //         num_response: String(getData[slectedId].num_response),
+  //         image_url: getData[slectedId].image_url,
+  //       },
+  //     });
+  //   } catch (error) {
+  //     console.log("画像のURL取得時にエラーが発生しました。", error);
+  //   }
+  //   setIsLoading(false);
+  // };
+
+  if (!getData) {
+    return (
+      <div>
+        <div>Loading...</div>
+        <CircularProgress />
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen">
       <h1 className="text-4xl mb-8">モンスターを選んでください</h1>
+      {/* <button onClick={HandleGetData}>Firestoreからデータを受け取る</button>  
+      <h1>{userId}</h1>
+      <h1>{errorMessages}</h1>
+      <h1>{responseMessages}</h1>
+      {isLoading && <CircularProgress />} */}
+      <div className="flex justify-center">
+        {Object.keys(getData).map((key) => (
+          <div key={key} className="">
+            <img
+              src={getData[key].image_url}
+              alt=""
+              style={{ width: "200px", height: "auto" }}
+            />
+            {/* <button onClick={handleModalOpen(key)}>{getData[key].name}</button> */}
+          </div>
+        ))}
+      </div>
       <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
         onClick={handleToTalk}
@@ -106,11 +105,35 @@ const SelectMonsterPage = () => {
       >
         戻る
       </button>
-      <button onClick={HandleGetData}>Firestoreからデータを受け取る</button>
-      <h1>{userId}</h1>
-      <h1>{errorMessages}</h1>
-      <h1>{responseMessages}</h1>
-      {isLoading && <CircularProgress />}
+
+      {/* {showModal && ( */}
+        {/* <div className="bg-gray-600 bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center"> */}
+          {/* <div className="bg-white p-4 rounded">
+            <h3 className="text-xl mb-2">Confirmation Dialog</h3>
+            <p>このモンスターで遊ぶ？</p>
+            <div className="mt-4 flex justify-end">
+              <button
+                onClick={handleModalClose}
+                className="mr-2 bg-gray-500 text-white px-4 py-2 rounded"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleRegister}
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+              >
+                OK!
+              </button>
+            </div>
+            {isLoading && <CircularProgress />}
+          </div> */}
+          {/* <div
+              className=" absolute top-0 left-0 w-full h-screen"
+              onClick={handleModalClose}
+            /> */}
+        {/* </div> */}
+      {/* )} */}
+      
     </div>
   );
 };
