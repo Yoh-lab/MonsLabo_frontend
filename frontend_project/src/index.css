@@ -70,4 +70,13 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+
+  @font-face {
+    font-family: DotGothic16;
+    src: url(./fonts/DotGothic16-Regular.ttf);
+  }
+
+  h2{
+    font-family: DotGothic16;
+  }
 }
