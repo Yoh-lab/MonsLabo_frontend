@@ -3,7 +3,7 @@ import { collection } from "firebase/firestore";
 import { getDocs } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-const GetMonsterId = async() => {
+const GetMonsterCount = async() => {
     const auth = getAuth();
     const user = auth.currentUser;
     if (user) {
@@ -21,7 +21,12 @@ const GetMonsterId = async() => {
           count ++;
         });
         console.log(count);
-        return count;
+        // return count;
+        if (count == 0) {
+          return false;
+        }else{
+          return true;
+        }
   
         // navigate("/talk", { state: { selectedFile } });
       } catch (error) {
@@ -30,10 +35,12 @@ const GetMonsterId = async() => {
           error
         );
         console.log(error.message);
+        return false;
       }
     } else {
       console.log("サインインしていません。");
+      return false;
     }
   };
 
-export default GetMonsterId
+export default GetMonsterCount

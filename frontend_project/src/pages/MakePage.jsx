@@ -7,7 +7,7 @@ import { getDownloadURL } from "firebase/storage";
 // import { database } from "../firebase/firebase";
 import CircularProgress from "@mui/material/CircularProgress";
 import HandleSendData from "../components/sendNewMonster";
-import GetMonsterId from "../components/GetMonsterId";
+import GetMonsterId from "../components/GetMonsterCount";
 import space_img from "../assets/space.png";
 
 const MakePage = () => {

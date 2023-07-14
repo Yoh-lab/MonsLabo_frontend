@@ -1,8 +1,23 @@
+import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 import paint_img from "../assets/lab_sample.jpeg";
+import { useState, useEffect } from "react";
+import GetMonsterCount from "../components/GetMonsterCount";
+import SignOut from "../components/SignOut";
 
 const SelectModePage = () => {
   const navigate = useNavigate();
+  const [getData, setGetData] = useState(null);
+
+  useEffect(() => {
+    const fetchDataAndSetData = async () => {
+      const data = await GetMonsterCount();
+      setGetData(data);
+      console.log(data);
+    };
+    fetchDataAndSetData();
+  }, []);
+
   const handleCreateMonster = () => {
     // モンスターを作成ボタンがクリックされた時の処理
     navigate("/selectMake");
@@ -13,6 +28,14 @@ const SelectModePage = () => {
     navigate("/selectMonster");
   };
 
+  if (getData == null) {
+    return (
+      <div>
+        <div>Loading...</div>
+        <CircularProgress />
+      </div>
+    );
+  }
   return (
     <div
       className="flex flex-col items-center justify-center w-screen h-screen"
@@ -29,12 +52,22 @@ const SelectModePage = () => {
         >
           モンスターを作成
         </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleTalkToMonster}
-        >
-          モンスターと会話
-        </button>
+
+        {getData ? (
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={handleTalkToMonster}
+          >
+            モンスターと会話
+          </button>
+        ) : (// １体もモンスターがいない場合はモンスターと会話ボタンを薄くして、クリックできないようにする
+          <button
+            className="bg-red-200 hover:bg-red-300 text-white font-bold py-2 px-4 rounded"
+          >
+            モンスターと会話
+          </button>
+        )}
+        <SignOut />
       </div>
     </div>
   );
