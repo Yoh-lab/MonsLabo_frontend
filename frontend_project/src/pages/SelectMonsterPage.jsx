@@ -5,8 +5,8 @@ import HandleGetData from "../components/GetAllMonsterData";
 
 const SelectMonsterPage = () => {
   const [getData, setGetData] = useState(null);
-  // const [showModal, setShowModal] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchDataAndSetData = async () => {
@@ -29,39 +29,40 @@ const SelectMonsterPage = () => {
   };
 
   
-  // const [selectedId, setSelectedId] = useState(null);
-  //   const handleModalOpen = (id) => {
-  //   setSelectedId(id);
-  //   setShowModal(true);
-  // };
+  const [selectedId, setSelectedId] = useState(null);
+    const handleModalOpen = (id) => {
+    setSelectedId(id);
+    console.log(id);
+    setShowModal(true);
+  };
 
-  // const handleModalClose = () => {
-  //   setShowModal(false);
-  // };
-  // const handleRegister = async (event) => {
-  //   event.preventDefault();
-  //   setIsLoading(true);
-  //   try {
-  //     navigate("/talk", {
-  //       state: {
-  //         selectedFile: getData[selectedId].image_url,
-  //         monsterId: String(selectedId),
-  //         name: getData[selectedId].name,
-  //         age: String(getData[selectedId].age),
-  //         gender: getData[selectedId].image_url,
-  //         hobby: getData[selectedId].hobby,
-  //         race: getData[selectedId].race,
-  //         _logInput: getData[selectedId]._logInput,
-  //         _logOutput: getData[selectedId]._logOutput,
-  //         num_response: String(getData[selectedId].num_response),
-  //         image_url: getData[selectedId].image_url,
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.log("画像のURL取得時にエラーが発生しました。", error);
-  //   }
-  //   setIsLoading(false);
-  // };
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    try {
+      navigate("/talk", {
+        state: {
+          selectedFile: getData[selectedId].image_url,
+          monsterId: selectedId.toString().padStart(3, "0"),
+          name: getData[selectedId].name,
+          age: String(getData[selectedId].age),
+          gender: getData[selectedId].image_url,
+          hobby: getData[selectedId].hobby,
+          race: getData[selectedId].race,
+          _logInput: getData[selectedId]._logInput,
+          _logOutput: getData[selectedId]._logOutput,
+          num_response: String(getData[selectedId].num_response),
+          image_url: getData[selectedId].image_url
+        },
+      });
+    } catch (error) {
+      console.log("画像のURL取得時にエラーが発生しました。", error);
+    }
+    setIsLoading(false);
+  };
 
   if (!getData) {
     return (
@@ -82,7 +83,7 @@ const SelectMonsterPage = () => {
               alt=""
               style={{ width: "200px", height: "auto" }}
             />
-            {/* <button onClick={handleModalOpen(key)}>{getData[key].name}</button> */}
+            <button onClick={() => handleModalOpen(key)}>{getData[key].name}</button>
           </div>
         ))}
       </div>
@@ -99,7 +100,7 @@ const SelectMonsterPage = () => {
         戻る
       </button>
 
-      {/* {showModal && (
+      {showModal && (
         <div className="bg-gray-600 bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
           <div className="bg-white p-4 rounded">
             <h3 className="text-xl mb-2">Confirmation Dialog</h3>
@@ -120,12 +121,12 @@ const SelectMonsterPage = () => {
             </div>
             {isLoading && <CircularProgress />}
           </div>
-          <div
+          {/* <div
             className=" absolute top-0 left-0 w-full h-screen"
             onClick={handleModalClose}
-          />
+          /> */}
         </div>
-      )} */}
+      )}
     </div>
   );
 };
