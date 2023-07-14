@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import paint_img from "../assets/paintpic.png";
 import Button from '@mui/material/Button';
+import SettingButton from "../components/SettingButton";
 
 const PaintPage = () => {
   const canvasRef = useRef(null);
@@ -104,53 +105,56 @@ const PaintPage = () => {
 
   return (
     <div>
-      {shouldNavigate && <Navigate to="/make" replace />}
-      <div
-        className="bg-blue-400 w-screen h-screen flex flex-col items-center justify-center space-y-5"
-        style={{
-          backgroundImage: `url(${paint_img})`,
-          backgroundSize: "cover",
-        }}
-      >
-        <div className="flex justify-center space-x-10">
-          <div className="bg-slate-200 flex items-center">
-            <label htmlFor="color">ペンの色:</label>
-            <input
-              type="color"
-              id="color"
-              value={penColor}
-              onChange={handleColorChange}
+      <SettingButton />
+      <div>
+        {shouldNavigate && <Navigate to="/make" replace />}
+        <div
+          className="bg-blue-400 w-screen h-screen flex flex-col items-center justify-center space-y-5"
+          style={{
+            backgroundImage: `url(${paint_img})`,
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="flex justify-center space-x-10">
+            <div className="bg-slate-200 flex items-center">
+              <label htmlFor="color">ペンの色:</label>
+              <input
+                type="color"
+                id="color"
+                value={penColor}
+                onChange={handleColorChange}
+              />
+            </div>
+            <div className="bg-slate-200 flex items-center">
+              <label htmlFor="size">ペンの太さ:</label>
+              <input
+                type="number"
+                id="size"
+                min="1"
+                max="10"
+                value={penSize}
+                onChange={handleSizeChange}
+              />
+            </div>
+          </div>
+          <div className="border-2 bg-white">
+            <canvas
+              ref={canvasRef}
+              onMouseDown={startDrawing}
+              onMouseMove={draw}
+              onMouseUp={stopDrawing}
+              onMouseLeave={stopDrawing}
             />
           </div>
-          <div className="bg-slate-200 flex items-center">
-            <label htmlFor="size">ペンの太さ:</label>
-            <input
-              type="number"
-              id="size"
-              min="1"
-              max="10"
-              value={penSize}
-              onChange={handleSizeChange}
-            />
+          <div className="flex justify-center space-x-5">
+            <button onClick={clearCanvas}>クリア</button>
+            <button onClick={undoDrawing}>一つ戻す</button>
+            <button onClick={redoDrawing}>一つ進める</button>
+            <button onClick={eraseDrawing}>消しゴム</button>
+            <button onClick={saveImage}>保存 & キャラ作成</button>
+            <Button variant="contained">Outlined</Button>
+            {/* <button onClick={() => setShouldNavigate(true)}>作成</button> */}
           </div>
-        </div>
-        <div className="border-2 bg-white">
-          <canvas
-            ref={canvasRef}
-            onMouseDown={startDrawing}
-            onMouseMove={draw}
-            onMouseUp={stopDrawing}
-            onMouseLeave={stopDrawing}
-          />
-        </div>
-        <div className="flex justify-center space-x-5">
-          <button onClick={clearCanvas}>クリア</button>
-          <button onClick={undoDrawing}>一つ戻す</button>
-          <button onClick={redoDrawing}>一つ進める</button>
-          <button onClick={eraseDrawing}>消しゴム</button>
-          <button onClick={saveImage}>保存 & キャラ作成</button>
-          <Button variant="contained">Outlined</Button>
-          {/* <button onClick={() => setShouldNavigate(true)}>作成</button> */}
         </div>
       </div>
     </div>

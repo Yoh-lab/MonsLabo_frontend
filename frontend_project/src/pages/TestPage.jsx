@@ -10,6 +10,7 @@ import { getDoc } from "firebase/firestore";
 import HandleGetData from "../components/GetAllMonsterData";
 import HandleSendData from "../components/sendNewMonster";
 import Uploadimage from "../components/UploadImage";
+import SettingButton from "../components/SettingButton";
 // import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 const TestPage = () => {
@@ -135,7 +136,7 @@ const TestPage = () => {
     setIsLoading(false);
   };
 
-  const inputData  ={
+  const inputData = {
     monsterId: "0",
     name: "test",
     age: "13331",
@@ -145,26 +146,23 @@ const TestPage = () => {
     _logInput: ["よろしくね", "おいのび太、お前はもう死んでいる"],
     _logOutput: ["こんにちは"],
     num_response: "1",
-    image_url: "https://firebasestorage.googleapis.com/v0/b/monster-ai.appspot.com/o/monster%2Fmonster1.jpg?alt=media&token=3b7b5b1a-4b0a-4b0a-8b0a-4b0a4b0a4b0a"
-  }
+    image_url:
+      "https://firebasestorage.googleapis.com/v0/b/monster-ai.appspot.com/o/monster%2Fmonster1.jpg?alt=media&token=3b7b5b1a-4b0a-4b0a-8b0a-4b0a4b0a4b0a",
+  };
 
   const sendData = async () => {
     await HandleSendData(inputData);
   };
 
-
-  
   const getMonsterData = async () => {
-    try{
-    const getData =   await HandleGetData();
-    console.log(getData);
-    }catch(error){
-        console.log("TestPage.jsxでエラー発生");
+    try {
+      const getData = await HandleGetData();
+      console.log(getData);
+    } catch (error) {
+      console.log("TestPage.jsxでエラー発生");
       console.log(error);
     }
   };
-
-
 
   const handleUploadImage = async () => {
     await Uploadimage();
@@ -238,19 +236,22 @@ const TestPage = () => {
 
   return (
     <div>
-      {isCompleted && <Navigate to="/talk" replace />}
-      <button onClick={sendFirestore}>Firestoreに送る</button>
-      <button onClick={getFirestore}>Firestoreからデータを受け取る</button>
-      <button onClick={HandleSendtData}>データを送る</button>
-      <button onClick={sendData}>フォーマット指定でデータを送る</button>
-      <button onClick={getMonsterData}>モンスターデータの取得</button>
-      {/* <button onClick={sendImage}>Storageに画像を送信</button> */}
-      <button onClick={getUid}>ユーザーIDの取得</button>
-      <button onClick={getMonsterData}>モンスターデータの取得</button>
-      <button onClick={handleUploadImage}>画像のアップロード</button>
-      {isLoading && <CircularProgress />}
-      {/*グルグルマーク*/} <CircularProgress />
-      <h3>{errorMessages}</h3>
+      <SettingButton />
+      <div>
+        {isCompleted && <Navigate to="/talk" replace />}
+        <button onClick={sendFirestore}>Firestoreに送る</button>
+        <button onClick={getFirestore}>Firestoreからデータを受け取る</button>
+        <button onClick={HandleSendtData}>データを送る</button>
+        <button onClick={sendData}>フォーマット指定でデータを送る</button>
+        <button onClick={getMonsterData}>モンスターデータの取得</button>
+        {/* <button onClick={sendImage}>Storageに画像を送信</button> */}
+        <button onClick={getUid}>ユーザーIDの取得</button>
+        <button onClick={getMonsterData}>モンスターデータの取得</button>
+        <button onClick={handleUploadImage}>画像のアップロード</button>
+        {isLoading && <CircularProgress />}
+        {/*グルグルマーク*/} <CircularProgress />
+        <h3>{errorMessages}</h3>
+      </div>
     </div>
   );
 };

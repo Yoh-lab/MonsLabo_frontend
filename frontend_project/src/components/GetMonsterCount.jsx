@@ -21,12 +21,7 @@ const GetMonsterCount = async() => {
           count ++;
         });
         console.log(count);
-        // return count;
-        if (count == 0) {
-          return false;
-        }else{
-          return true;
-        }
+        return count;
   
         // navigate("/talk", { state: { selectedFile } });
       } catch (error) {
@@ -35,11 +30,11 @@ const GetMonsterCount = async() => {
           error
         );
         console.log(error.message);
-        return false;
+        return 0;
       }
     } else {
       console.log("サインインしていません。");
-      return false;
+      return 0;
     }
   };
 
