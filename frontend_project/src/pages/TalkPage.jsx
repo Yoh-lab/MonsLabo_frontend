@@ -65,7 +65,7 @@ const TalkPage = () => {
       }
       HandleUpdateData(NewData)
       if (num_response == 4) {
-        handleModalOpen;
+        setShowModal(true)
         console.log("showModal", showModal);
       }else{
         console.log(num_response);
@@ -121,9 +121,8 @@ const TalkPage = () => {
   };
 
 
-  const handleModalOpen = (event) => {
-    event.preventDefault();
-    setShowModal(true);
+  const handleModalClose = () => {
+    setShowModal(false);
   };
 
 
@@ -187,7 +186,7 @@ const TalkPage = () => {
               <p>モンスターとの会話を楽しんでください！</p>
               <div className="mt-4 flex justify-end">
                 <button
-                  onClick={setShowModal(false)}
+                  onClick={handleModalClose}
                   className="bg-blue-500 text-white px-4 py-2 rounded"
                 >
                   OK!
@@ -200,7 +199,7 @@ const TalkPage = () => {
               onClick={handleModalClose}
             /> */}
           </div>
-        )}Ï
+        )}
     </div>
   );
 };
