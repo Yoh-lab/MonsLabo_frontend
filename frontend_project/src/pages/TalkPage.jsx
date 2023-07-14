@@ -12,6 +12,7 @@ const TalkPage = () => {
   const [responseData, setResponseData] = useState("");
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   // const selectedFile = location.state?.selectedFile || null;
 
   const monsterId = location.state?.monsterId || null;
@@ -20,17 +21,17 @@ const TalkPage = () => {
   const gender = location.state?.gender || null;
   const hobby = location.state?.hobby || null;
   const race = location.state?.race || null;
-  const _logInput = location.state?._logInput || null;
-  const _logOutput = location.state?._logOutput || null;
-  const num_response = location.state?.num_response || null;
+  const [_logInput, setLogInput] = useState(location.state?._logInput || null);
+  const [_logOutput, setLogOutput] = useState(location.state?._logOutput || null);
+  const [num_response, setNumResponse] = useState(location.state?.num_response || null);
   const image_url = location.state?.image_url || null;
 
   const handleInputChange = (e) => {
-    console.log(monsterId, name, age, gender, hobby, race, _logInput, _logOutput, num_response, image_url);
+    console.log(showModal, monsterId, name, age, gender, hobby, race, _logInput, _logOutput, num_response, image_url);
     setFormInput(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleTrainingSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
@@ -38,23 +39,40 @@ const TalkPage = () => {
       const response = await axios.post(
         "https://monslabobackend-production.up.railway.app/response",
         {
-          name: name,
-          age: age,
-          sex: gender,
-          hobby: hobby,
-          race: race,
-          input_log: _logInput,
+          name: String(name),
+          age: Number(age),
+          sex: String(gender),
+          hobby: String(hobby),
+          race: String(race),
+          input_log: _logInput.concat([formInput]),
           output_log: _logOutput,
-          num_response: num_response,
+          num_response: Number(num_response),
+          // name: "",
+          // age: 13331,
+          // sex: "male",
+          // hobby: "volleyball",
+          // race: "rabit",
+          // input_log: ["よろしくね", "おいのび太、お前はもう死んでいる"],
+          // output_log: ["こんにちは"],
+          // num_response: 1,
         }
       );
       const NewData = {
         monsterId: monsterId,
-        _logInput: _logInput.push(formInput),
-        _logOutput: _logOutput.push(response.data),
-        num_response: num_response,
+        _logInput: _logInput.concat([formInput]),
+        _logOutput: _logOutput.concat([response.data]),
+        num_response: Number(Number(num_response)+1),
       }
       HandleUpdateData(NewData)
+      if (num_response == 4) {
+        handleModalOpen;
+        console.log("showModal", showModal);
+      }else{
+        console.log(num_response);
+      }
+      setNumResponse(Number(num_response) + 1);
+      setLogInput(_logInput.concat([formInput]));
+      setLogOutput(_logOutput.concat([response.data]));
       setResponseData(response.data);
       setFormInput("");
     } catch (error) {
@@ -63,6 +81,51 @@ const TalkPage = () => {
     }
     setIsLoading(false);
   };
+
+
+  const handleTalkSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      console.log(formInput);
+      const response = await axios.post(
+        "",
+        {
+          name: String(name),
+          age: Number(age),
+          sex: String(gender),
+          hobby: String(hobby),
+          race: String(race),
+          input_log: _logInput.concat([formInput]),
+          output_log: _logOutput,
+          new_num_response: Number(num_response),
+        }
+      );
+      const NewData = {
+        monsterId: monsterId,
+        _logInput: _logInput.concat([formInput]),
+        _logOutput: _logOutput.concat([response.data]),
+        num_response: Number(Number(num_response)+1),
+      }
+      HandleUpdateData(NewData)
+      setNumResponse(Number(num_response) + 1);
+      setLogInput(_logInput.concat([formInput]));
+      setLogOutput(_logOutput.concat([response.data]));
+      setResponseData(response.data);
+      setFormInput("");
+    } catch (error) {
+      console.error(error);
+      setResponseData("Error: Failed to fetch data from API");
+    }
+    setIsLoading(false);
+  };
+
+
+  const handleModalOpen = (event) => {
+    event.preventDefault();
+    setShowModal(true);
+  };
+
 
   return (
     <div>
@@ -84,9 +147,9 @@ const TalkPage = () => {
         <div className="my-12"></div> {/* 余白を追加 */}
         {/* 会話のログが５往復以内なら、育成中の文字を追加 */}
         {num_response<5 ? (
-        <h2 className="bg-yellow-200">育成中</h2>
+        <h2 className="bg-yellow-200">育成中（{num_response}/5回）</h2>
         ):(<h2 className="bg-purple-200">育成完了</h2>)}
-        <form className="my-4 flex items-center w-3/5" onSubmit={isLoading==false ? handleSubmit : null}>
+        <form className="my-4 flex items-center w-3/5" onSubmit={isLoading==false ? (num_response<5 ?handleTrainingSubmit : handleTalkSubmit) : null}>
           <textarea
             className="flex-grow h-10 px-4 py-2 border border-gray-300 rounded mr-4"
             placeholder="Enter your text"
@@ -116,6 +179,28 @@ const TalkPage = () => {
             {isLoading && <CircularProgress />}
         </form>
       </div>
+
+      {showModal && (
+          <div className="bg-gray-600 bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
+            <div className="bg-white p-4 rounded">
+              <h3 className="text-xl mb-2">育成完了！！</h3>
+              <p>モンスターとの会話を楽しんでください！</p>
+              <div className="mt-4 flex justify-end">
+                <button
+                  onClick={setShowModal(false)}
+                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                  OK!
+                </button>
+              </div>
+              {isLoading && <CircularProgress />}
+            </div>
+            {/* <div
+              className=" absolute top-0 left-0 w-full h-screen"
+              onClick={handleModalClose}
+            /> */}
+          </div>
+        )}Ï
     </div>
   );
 };
