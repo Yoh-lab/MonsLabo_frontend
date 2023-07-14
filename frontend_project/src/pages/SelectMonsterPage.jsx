@@ -18,12 +18,7 @@ const SelectMonsterPage = () => {
   }, []);
 
   const navigate = useNavigate();
-  const handleToTalk = () => {
-    // モンスターを作成ボタンがクリックされた時の処理
-    navigate("/talk");
-  };
-
-  const handleToSelectMode = () => {
+  const handleBackToSelectMode = () => {
     // モンスターと会話ボタンがクリックされた時の処理
     navigate("/selectMode");
   };
@@ -88,14 +83,8 @@ const SelectMonsterPage = () => {
         ))}
       </div>
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
-        onClick={handleToTalk}
-      >
-        このモンスターで遊ぶ
-      </button>
-      <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={handleToSelectMode}
+        onClick={handleBackToSelectMode}
       >
         戻る
       </button>

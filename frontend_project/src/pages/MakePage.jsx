@@ -251,7 +251,7 @@ const MakePage = () => {
                 Cancel
               </button>
               <button
-                onClick={handleRegister}
+                onClick={isLoading==false ? handleRegister : null}
                 className="bg-blue-500 text-white px-4 py-2 rounded"
               >
                 OK!
