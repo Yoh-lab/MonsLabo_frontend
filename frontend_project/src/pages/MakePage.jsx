@@ -102,17 +102,17 @@ const MakePage = () => {
         try {
           navigate("/talk", {
             state: {
-              selectedFile,
-              monsterId: String(0),
-              name,
+              // selectedFile: selectedFile,
+              monsterId: monsterId.toString().padStart(3, "0"),
+              name: name,
               age: String(age),
               gender: gender,
-              hobby,
-              race,
+              hobby: hobby,
+              race: race,
               _logInput: [],
               _logOutput: [],
               num_response: "0",
-              image_url,
+              image_url: image_url,
             },
           });
         } catch (error) {
@@ -125,34 +125,8 @@ const MakePage = () => {
     }
     setIsLoading(false);
 
-    //await database.collection("RdeJHrhbb8WrVeQjUserGFT4aA13").doc("monster1").add(characterData);
-
-    // navigate("/talk", { state: { selectedFile, monsterId, name, age, gender, hobby, race, num_response, image_url} });
   };
 
-  // const [isLoading, setIsLoading] = useState(false);
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   setIsLoading(true);
-
-  //   try {
-  //     // Firestoreにデータを格納
-  //     await database.collection("users").doc("RdeJHrhbb8WrVeQjUserGFT4aA13").collection("users").add({
-  //       name,
-  //       gender,
-  //       hobby,
-  //     });
-  //     // 格納が完了したら以下のコードを実行する
-  //     {/*グルグルマーク*/}
-  //     <CircularProgress />
-  //     // navigate("/talk", { state: { selectedFile } });
-  //   } catch (error) {
-  //     console.error("Firestoreへの格納中にエラーが発生しました。", error);
-  //   }
-
-  //   setIsLoading(false);
-  // };
 
   return (
     <div

@@ -45,11 +45,11 @@ const SelectMonsterPage = () => {
     try {
       navigate("/talk", {
         state: {
-          selectedFile: getData[selectedId].image_url,
+          // selectedFile: getData[selectedId].image_url,
           monsterId: selectedId.toString().padStart(3, "0"),
           name: getData[selectedId].name,
           age: String(getData[selectedId].age),
-          gender: getData[selectedId].image_url,
+          gender: getData[selectedId].gender,
           hobby: getData[selectedId].hobby,
           race: getData[selectedId].race,
           _logInput: getData[selectedId]._logInput,
