@@ -8,7 +8,7 @@ const TalkPage = () => {
   const [formInput, setFormInput] = useState("");
   const [responseData, setResponseData] = useState("");
   const location = useLocation();
-  const selectedFile = location.state?.selectedFile || null;
+  // const selectedFile = location.state?.selectedFile || null;
 
   const monsterId = location.state?.monsterId || null;
   const name = location.state?.name || null;
@@ -59,7 +59,7 @@ const TalkPage = () => {
     >
 
       <div className="border-4 bg-white">
-        <img src={selectedFile} width="520" height="390" alt="My Drawing" />
+        <img src={image_url} width="520" height="390" alt="My Drawing" />
       </div>
 
       <div className="mt-4 w-screen">

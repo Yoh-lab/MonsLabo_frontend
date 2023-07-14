@@ -24,7 +24,7 @@ const HandleGetData = async () => {
         name: doc.data().name,
         age: doc.data().age,
         race: doc.data().race,
-        genter: doc.data().genter,
+        gender: doc.data().gender,
         hobby: doc.data().hobby,
         image_url: doc.data().image_url,
         _logInput: doc.data()._logInput,
