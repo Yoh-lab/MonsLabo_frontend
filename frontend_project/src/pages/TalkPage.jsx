@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useState, } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 // import character_img from "../assets/ドラゴン.png";
 import lab_img from "../assets/lab.jpg";
 import SettingButton from "../components/SettingButton";
+import HandleUpdateData from "../components/UpdateData";
 
 const TalkPage = () => {
   const [formInput, setFormInput] = useState("");
   const [responseData, setResponseData] = useState("");
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
   // const selectedFile = location.state?.selectedFile || null;
 
   const monsterId = location.state?.monsterId || null;
@@ -29,28 +32,36 @@ const TalkPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
       console.log(formInput);
       const response = await axios.post(
         "https://monslabobackend-production.up.railway.app/response",
         {
-          name: "test",
-          age: 13331,
-          sex: "male",
-          hobby: "volleyball",
-          race: "rabit",
-          input_log: ["よろしくね", "おいのび太、お前はもう死んでいる"],
-          output_log: ["こんにちは"],
-          num_response: 1,
+          name: name,
+          age: age,
+          sex: gender,
+          hobby: hobby,
+          race: race,
+          input_log: _logInput,
+          output_log: _logOutput,
+          num_response: num_response,
         }
       );
-
+      const NewData = {
+        monsterId: monsterId,
+        _logInput: _logInput.push(formInput),
+        _logOutput: _logOutput.push(response.data),
+        num_response: num_response,
+      }
+      HandleUpdateData(NewData)
       setResponseData(response.data);
+      setFormInput("");
     } catch (error) {
       console.error(error);
       setResponseData("Error: Failed to fetch data from API");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -71,7 +82,11 @@ const TalkPage = () => {
           ></textarea>
         </div>
         <div className="my-12"></div> {/* 余白を追加 */}
-        <form className="my-4 flex items-center w-3/5" onSubmit={handleSubmit}>
+        {/* 会話のログが５往復以内なら、育成中の文字を追加 */}
+        {num_response<5 ? (
+        <h2 className="bg-yellow-200">育成中</h2>
+        ):(<h2 className="bg-purple-200">育成完了</h2>)}
+        <form className="my-4 flex items-center w-3/5" onSubmit={isLoading==false ? handleSubmit : null}>
           <textarea
             className="flex-grow h-10 px-4 py-2 border border-gray-300 rounded mr-4"
             placeholder="Enter your text"
@@ -98,6 +113,7 @@ const TalkPage = () => {
                 />
               </svg>
             </button>
+            {isLoading && <CircularProgress />}
         </form>
       </div>
     </div>
