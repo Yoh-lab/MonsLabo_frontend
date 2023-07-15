@@ -25,6 +25,7 @@ const TalkPage = () => {
   const [_logOutput, setLogOutput] = useState(location.state?._logOutput || null);
   const [num_response, setNumResponse] = useState(location.state?.num_response || null);
   const image_url = location.state?.image_url || null;
+  const [new_num_response, setNewNumResponse] = useState(0);
 
   const handleInputChange = (e) => {
     console.log(showModal, monsterId, name, age, gender, hobby, race, _logInput, _logOutput, num_response, image_url);
@@ -71,6 +72,7 @@ const TalkPage = () => {
         console.log(num_response);
       }
       setNumResponse(Number(num_response) + 1);
+      setNewNumResponse(Number(new_num_response) + 1);
       setLogInput(_logInput.concat([formInput]));
       setLogOutput(_logOutput.concat([response.data]));
       setResponseData(response.data);
@@ -89,7 +91,7 @@ const TalkPage = () => {
     try {
       console.log(formInput);
       const response = await axios.post(
-        "",
+        "https://monslabobackend-production.up.railway.app/answer",
         {
           name: String(name),
           age: Number(age),
@@ -98,7 +100,7 @@ const TalkPage = () => {
           race: String(race),
           input_log: _logInput.concat([formInput]),
           output_log: _logOutput,
-          new_num_response: Number(num_response),
+          new_num_response: Number(new_num_response),
         }
       );
       const NewData = {
@@ -109,6 +111,7 @@ const TalkPage = () => {
       }
       HandleUpdateData(NewData)
       setNumResponse(Number(num_response) + 1);
+      setNewNumResponse(Number(new_num_response) + 1);
       setLogInput(_logInput.concat([formInput]));
       setLogOutput(_logOutput.concat([response.data]));
       setResponseData(response.data);
@@ -136,13 +139,15 @@ const TalkPage = () => {
         <div className="border-2 bg-white">
           <img src={image_url} className="max-w-lg max-h-96" />
         </div>
+        <h2>
         <div className="mt-2 w-screen">
           <textarea
-            className="w-3/5 h-40 px-4 py-2 border border-gray-300 rounded-lg bg-gradient-to-t from-gray-400 to-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            value={responseData || "No response data available"}
+            className="w-3/5 h-40 px-4 py-2 border border-gray-300 rounded-lg bg-gradient-to-t from-gray-400 to-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent te"
+            value={responseData || "No response"}
             readOnly // 入力禁止にする
           ></textarea>
         </div>
+        </h2>
         <div className="my-2"></div> {/* 余白を追加 */}
         {/* 会話のログが５往復以内なら、育成中の文字を追加 */}
         <div className="relative w-3/5">
@@ -155,6 +160,7 @@ const TalkPage = () => {
             育成完了
           </h2>
         )}
+        <h2>
         <form className="my-4 flex items-center pt-2" onSubmit={isLoading == false ? (num_response < 5 ? handleTrainingSubmit : handleTalkSubmit) : null}>
           <textarea
             className="flex-grow h-10 px-4 py-2 border-2 border-gray-300 mr-2 pl-8"
@@ -166,7 +172,7 @@ const TalkPage = () => {
             type="submit"
             className="px-4 py-2 text-white bg-black border-pink-400 border-2 flex items-center"
           >
-            <span className="mr-2">送信</span>
+            <h2 className="mr-2">送信</h2>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -184,13 +190,14 @@ const TalkPage = () => {
           </button>
           {isLoading && <CircularProgress />}
         </form>
+        </h2>
       </div>
       </div>
 
       {showModal && (
           <div className="bg-gray-600 bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
             <div className="bg-white p-4 rounded">
-              <h3 className="text-xl mb-2">育成完了！！</h3>
+              <h2 className="text-xl mb-2">育成完了！！</h2>
               <p>モンスターとの会話を楽しんでください！</p>
               <div className="mt-4 flex justify-end">
                 <button

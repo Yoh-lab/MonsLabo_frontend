@@ -15,6 +15,7 @@ import SelectModePage from "./pages/SelectModePage";
 import SelectMonsterPage from "./pages/SelectMonsterPage";
 import TestPage from "./pages/TestPage";
 import SelectMakePage from "./pages/SelectMakePage";
+import ScrollTop from "./components/ScrollTop";
 // import TestPage from "./pages/TestPage";
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
           <div className="">
             {/* ルーティングを設定するためにBrowserRouterを使用 */}
             <BrowserRouter>
+            <ScrollTop />
               <Routes>
                 {/* ルートパスに対するルート要素としてSignInPageコンポーネントを設定 */}
                 <Route path={`/`} element={<HomePage />} />
