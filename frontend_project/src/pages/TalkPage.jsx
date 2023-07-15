@@ -152,8 +152,8 @@ const TalkPage = () => {
         <h2 className="pt-2">
         <div className="mt-2 w-screen">
           <textarea
-            className="w-3/5 h-40 px-4 py-2 border border-gray-300 rounded-lg bg-gradient-to-t from-gray-400 to-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            value={responseData || "５回会話を行なって，，モンスターの育成を行なってください．"}
+            className="w-3/5 h-40 px-4 py-2 dark:text-black border border-gray-300 rounded-lg bg-gradient-to-t from-gray-400 to-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            value={responseData || "５回会話を行なって，モンスターの育成を行なってください．"}
             readOnly // 入力禁止にする
           ></textarea>
         </div>
@@ -173,7 +173,7 @@ const TalkPage = () => {
         <h2>
         <form className="my-4 flex items-center justify-center pt-2" onSubmit={isLoading == false ? (num_response < 5 ? handleTrainingSubmit : handleTalkSubmit) : null}>
           <textarea
-            className="flex-grow h-10 px-4 py-2 border-2 border-gray-300 mr-2 pl-8"
+            className="flex-grow dark:text-black h-10 px-4 py-2 border-2 border-gray-300 mr-2 pl-8"
             placeholder="例）こんにちは"
             value={formInput}
             onChange={handleInputChange}
