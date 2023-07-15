@@ -30,7 +30,7 @@ const SignOut = () => {
       <img
         src={Image}
         alt="Click to Sign Out"
-        className="w-16 h-16 cursor-pointer"
+        className="w-14 h-12 cursor-pointer hover:opacity-60"
         onClick={handleClickSignOut}
       />
     );
