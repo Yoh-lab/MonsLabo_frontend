@@ -12,7 +12,7 @@ const HomePage = () => {
     //   </div>
     // </div>
     <div
-      className="flex flex-col items-center justify-center w-screen"
+      className="App-header flex flex-col items-center justify-center w-screen"
       style={{
         backgroundImage: `url(${BackIcon})`,
         backgroundPosition: "center",
