@@ -3,7 +3,7 @@
   animation-name: fadeInAnime, randomBlink, motionBlur;
   animation-duration: 3s, 0.1s, 1s; /* blinkのdurationを0.5秒に変更 */
   animation-fill-mode: forwards;
-  animation-iteration-count: 1, 7,1,1;
+  animation-iteration-count: 1, 7, 1, 1;
   animation-timing-function: steps(2, start); /* ステップ数とタイミング関数を設定 */
   transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* 背景色とトランスフォームのトランジションを追加 */
 }
@@ -24,7 +24,7 @@
   50% {
     opacity: 0;
   } 
-100% {
+  100% {
     opacity: 1;
   }
   25% {
@@ -37,13 +37,17 @@
 
 @keyframes motionBlur {
   0% {
-      filter: blur(0); /* ブラーフィルターを無効にする */
+    filter: blur(0); /* ブラーフィルターを無効にする */
   }
   50% {
-      filter: blur(3px); /* ブラーフィルターを5ピクセルに設定 */
+    filter: blur(3px); /* ブラーフィルターを5ピクセルに設定 */
+  }
+  95% {
+    opacity: 0.3;;
   }
   100% {
-      filter: blur(0); /* ブラーフィルターを無効にする */
+    filter: blur(0); /* ブラーフィルターを無効にする */
+    opacity: 1;
   }
 }
 
