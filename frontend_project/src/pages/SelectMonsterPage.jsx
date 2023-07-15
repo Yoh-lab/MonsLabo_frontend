@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import HandleGetData from "../components/GetAllMonsterData";
 import SettingButton from "../components/SettingButton";
+import green_img from "../assets/green.png";
 
 const SelectMonsterPage = () => {
   const [getData, setGetData] = useState(null);
@@ -19,10 +20,6 @@ const SelectMonsterPage = () => {
   }, []);
 
   const navigate = useNavigate();
-  const handleBackToSelectMode = () => {
-    // モンスターと会話ボタンがクリックされた時の処理
-    navigate("/selectMode");
-  };
 
   const [selectedId, setSelectedId] = useState(null);
   const handleModalOpen = (id) => {
@@ -70,55 +67,58 @@ const SelectMonsterPage = () => {
   return (
     <div>
       <SettingButton />
-      <div className="flex flex-col items-center justify-center w-screen h-screen">
-        <h1 className="text-4xl mb-8">モンスターを選んでください</h1>
-        <div className="flex justify-center">
-          {Object.keys(getData).map((key) => (
-            <div key={key} className="">
-              <img
-                src={getData[key].image_url}
-                alt=""
-                style={{ width: "200px", height: "auto" }}
-              />
-              <button onClick={() => handleModalOpen(key)}>
-                {getData[key].name}
-              </button>
-            </div>
-          ))}
-        </div>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleBackToSelectMode}
-        >
-          戻る
-        </button>
-        {showModal && (
-          <div className="bg-gray-600 bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
-            <div className="bg-white p-4 rounded">
-              <h3 className="text-xl mb-2">Confirmation Dialog</h3>
-              <p>このモンスターで遊ぶ？</p>
-              <div className="mt-4 flex justify-end">
-                <button
-                  onClick={handleModalClose}
-                  className="mr-2 bg-gray-500 text-white px-4 py-2 rounded"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleRegister}
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
-                >
-                  OK!
-                </button>
+      <div className="flex flex-col items-center w-screen h-screen justify-center"
+        style={{ backgroundImage: `url(${green_img})`, backgroundSize: "cover" , backgroundPosition: "center"}}>
+        <h2 className="text-center">
+          <div className="flex flex-col items-center justify-center w-screen h-screen px-28 pb-8">
+            <h1 className="text-4xl mb-8 pt-20 pb-4 text-white">モンスターを選んでください</h1>
+            <div className="border-2 border-gray-500">
+              <div className="flex flex-row justify-center pb-12 flex-wrap gap-5 pt-3 pb-3 overflow-auto overscroll-contain">
+              {Object.keys(getData).map((key) => (
+                <div key={key} className="flex w-1/6 bg-white flex-col items-center justify-center gap-4">
+                  <div className="flex-grow">
+                    <img
+                      src={getData[key].image_url}
+                      className="max-h-40"
+                      style={{ width: "100%",height: "auto" }}
+                    />
+                  </div>
+                  <button onClick={() => handleModalOpen(key)}>
+                    {getData[key].name}
+                  </button>
+                </div>
+              ))}
               </div>
-              {isLoading && <CircularProgress />}
             </div>
-            {/* <div
-              className=" absolute top-0 left-0 w-full h-screen"
-              onClick={handleModalClose}
-            /> */}
+            {showModal && (
+              <div className="bg-gray-600 bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
+                <div className="bg-white p-4 rounded">
+                  <h3 className="text-xl mb-2">Confirmation Dialog</h3>
+                  <p>このモンスターで遊ぶ？</p>
+                  <div className="mt-4 flex justify-end">
+                    <button
+                      onClick={handleModalClose}
+                      className="mr-2 bg-gray-500 text-white px-4 py-2 rounded"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={handleRegister}
+                      className="bg-blue-500 text-white px-4 py-2 rounded"
+                    >
+                      OK!
+                    </button>
+                  </div>
+                  {isLoading && <CircularProgress />}
+                </div>
+                {/* <div
+                  className=" absolute top-0 left-0 w-full h-screen"
+                  onClick={handleModalClose}
+                /> */}
+              </div>
+            )}
           </div>
-        )}
+        </h2>
       </div>
     </div>
   );
