@@ -180,7 +180,7 @@ const TalkPage = () => {
           ></textarea>
           <button
             type="submit"
-            className="px-4 py-2 text-white bg-black border-pink-400 border-2 flex items-center"
+            className="px-4 py-2 text-white bg-black b-fuchsia-500 border-2 flex items-center"
           >
             <h2 className="mr-2">送信</h2>
             <svg
@@ -205,17 +205,19 @@ const TalkPage = () => {
       </div>
 
       {showModal && (
-          <div className="bg-gray-600 bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
-            <div className="bg-white p-4 rounded">
-              <h2 className="text-xl mb-2">育成完了！！</h2>
-              <p>モンスターとの会話を楽しんでください！</p>
+          <div className="bg-gray-60 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
+            <div className="bg-black p-4 rounded border-2 border-yellow-400">
+              <h2 className="text-xl text-white mb-2">育成完了！！</h2>
+              <h2>モンスターとの会話を楽しんでください！</h2>
               <div className="mt-4 flex justify-end">
+                <h2>
                 <button
                   onClick={handleModalClose}
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                  className="mr-2 bg-black text-white px-4 py-2 rounded"
                 >
                   OK!
                 </button>
+                </h2>
               </div>
               {isLoading && <CircularProgress />}
             </div>
