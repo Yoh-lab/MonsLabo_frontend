@@ -70,10 +70,10 @@ const SelectMonsterPage = () => {
       <div className="flex flex-col items-center w-screen h-screen justify-center"
         style={{ backgroundImage: `url(${green_img})`, backgroundSize: "cover" , backgroundPosition: "center"}}>
         <h2 className="text-center">
-          <div className="flex flex-col items-center justify-center w-screen h-screen px-28 pb-8">
-            <h1 className="text-4xl mb-8 pt-20 pb-4 text-white">モンスターを選んでください</h1>
-            <div className="border-2 border-gray-500">
-              <div className="flex flex-row justify-center pb-12 flex-wrap gap-5 pt-3 pb-3 overflow-auto overscroll-contain">
+          <div className="flex flex-col items-center justify-center w-screen h-screen px-28 pb-16">
+            <h1 className="text-4xl mb-8 pt-16 pb-20 text-white">モンスターを選んでください</h1>
+            <div className="border-2 border-gray-500 overflow-auto">
+              <div className="flex flex-row justify-center py-20 pb-5 flex-wrap gap-5 pt-3">
               {Object.keys(getData).map((key) => (
                 <div key={key} className="flex w-1/6 bg-white flex-col items-center justify-center gap-4">
                   <div className="flex-grow">
