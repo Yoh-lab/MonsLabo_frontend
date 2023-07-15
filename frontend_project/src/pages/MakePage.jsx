@@ -193,7 +193,7 @@ const MakePage = () => {
                         value={name}
                         onChange={handleNameChange}
                         className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="入力してください"
+                        placeholder="例）竜王"
                         required
                       />
                     </div>
@@ -209,7 +209,7 @@ const MakePage = () => {
                         value={age}
                         onChange={handleAgeChange}
                         className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="入力してください"
+                        placeholder="例）10"
                         required
                       />
                     </div>
@@ -225,7 +225,7 @@ const MakePage = () => {
                         value={gender}
                         onChange={handleGenderChange}
                         className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="入力してください"
+                        placeholder="例）性別"
                         required
                       />
                     </div>
@@ -241,7 +241,7 @@ const MakePage = () => {
                         value={race}
                         onChange={handleRaceChange}
                         className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="入力してください"
+                        placeholder="例）ドラゴン"
                         required
                       />
                     </div>
@@ -257,7 +257,7 @@ const MakePage = () => {
                         value={hobby}
                         onChange={handleHobbyChange}
                         className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="入力してください"
+                        placeholder="例）筋トレ"
                         required
                       />
                     </div>
@@ -281,13 +281,13 @@ const MakePage = () => {
                   <div className="mt-4 flex justify-end">
                     <button
                       onClick={handleModalClose}
-                      className="mr-2 bg-gray-500 text-white px-4 py-2 rounded"
+                      className="mr-2 bg-black text-white px-4 py-2 rounded"
                     >
                       Cancel
                     </button>
                     <button
                       onClick={handleRegister}
-                      className="text-white px-4 py-2 rounded"
+                      className="bg-black text-white px-4 py-2 rounded"
                     >
                       OK!
                     </button>
