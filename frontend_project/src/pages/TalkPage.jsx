@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 // import character_img from "../assets/ドラゴン.png";
-import lab_img from "../assets/lab.jpg";
+import talk_img from "../assets/talk.png";
 import SettingButton from "../components/SettingButton";
 import HandleUpdateData from "../components/UpdateData";
 
@@ -130,53 +130,61 @@ const TalkPage = () => {
     <div>
       <SettingButton />
       <div
-        className="flex flex-col items-center w-screen h-screen justify-end"
-        style={{ backgroundImage: `url(${lab_img})`, backgroundSize: "cover" }}
+        className="flex flex-col items-center w-screen h-screen justify-center"
+        style={{ backgroundImage: `url(${talk_img})`, backgroundSize: "cover" }}
       >
-        <div className="border-4 bg-white">
-          <img src={image_url} width="520" height="390" alt="My Drawing" />
+        <div className="border-2 bg-white">
+          <img src={image_url} className="max-w-lg max-h-96" />
         </div>
-        <div className="mt-4 w-screen">
+        <div className="mt-2 w-screen">
           <textarea
             className="w-3/5 h-40 px-4 py-2 border border-gray-300 rounded-lg bg-gradient-to-t from-gray-400 to-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             value={responseData || "No response data available"}
             readOnly // 入力禁止にする
           ></textarea>
         </div>
-        <div className="my-12"></div> {/* 余白を追加 */}
+        <div className="my-2"></div> {/* 余白を追加 */}
         {/* 会話のログが５往復以内なら、育成中の文字を追加 */}
-        {num_response<5 ? (
-        <h2 className="bg-yellow-200">育成中（{num_response}/5回）</h2>
-        ):(<h2 className="bg-purple-200">育成完了</h2>)}
-        <form className="my-4 flex items-center w-3/5" onSubmit={isLoading==false ? (num_response<5 ?handleTrainingSubmit : handleTalkSubmit) : null}>
+        <div className="relative w-3/5">
+        {num_response < 5 ? (
+          <h2 className="absolute top-0 left-0 bg-black text-white border-2 border-gray-300 px-2 rounded">
+            育成中（{num_response}/5回）
+          </h2>
+        ) : (
+          <h2 className="absolute top-0 left-0 bg-black text-white border-2 border-gray-300 py-1 px-2 rounded">
+            育成完了
+          </h2>
+        )}
+        <form className="my-4 flex items-center pt-2" onSubmit={isLoading == false ? (num_response < 5 ? handleTrainingSubmit : handleTalkSubmit) : null}>
           <textarea
-            className="flex-grow h-10 px-4 py-2 border border-gray-300 rounded mr-4"
-            placeholder="Enter your text"
+            className="flex-grow h-10 px-4 py-2 border-2 border-gray-300 mr-2 pl-8"
+            placeholder="例）こんにちは"
             value={formInput}
             onChange={handleInputChange}
           ></textarea>
           <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center"
+            type="submit"
+            className="px-4 py-2 text-white bg-black border-pink-400 border-2 flex items-center"
+          >
+            <span className="mr-2">送信</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <span className="mr-2">送信</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                />
-              </svg>
-            </button>
-            {isLoading && <CircularProgress />}
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+              />
+            </svg>
+          </button>
+          {isLoading && <CircularProgress />}
         </form>
+      </div>
       </div>
 
       {showModal && (
