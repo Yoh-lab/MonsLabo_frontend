@@ -10,10 +10,10 @@
 
 @keyframes fadeInAnime {
   from {
-      opacity: 0;
+    opacity: 0;
   }
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
@@ -43,7 +43,7 @@
     filter: blur(3px); /* ブラーフィルターを5ピクセルに設定 */
   }
   95% {
-    opacity: 0.3;;
+    opacity: 0.3;
   }
   100% {
     filter: blur(0); /* ブラーフィルターを無効にする */
