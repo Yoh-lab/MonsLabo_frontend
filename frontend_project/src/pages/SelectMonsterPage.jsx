@@ -92,19 +92,19 @@ const SelectMonsterPage = () => {
             </div>
             {showModal && (
               <div className="bg-gray-600 bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
-                <div className="bg-white p-4 rounded">
-                  <h3 className="text-xl mb-2">Confirmation Dialog</h3>
+                <div className="bg-black p-4 rounded border-2 border-yellow-400">
+                  <h3 className="text-xl text-white mb-2">Confirmation Dialog</h3>
                   <p>このモンスターで遊ぶ？</p>
                   <div className="mt-4 flex justify-end">
                     <button
                       onClick={handleModalClose}
-                      className="mr-2 bg-gray-500 text-white px-4 py-2 rounded"
+                      className="mr-2 bg-black text-white px-4 py-2 rounded"
                     >
                       Cancel
                     </button>
                     <button
                       onClick={handleRegister}
-                      className="bg-blue-500 text-white px-4 py-2 rounded"
+                      className="bg-black text-white px-4 py-2 rounded"
                     >
                       OK!
                     </button>

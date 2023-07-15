@@ -205,7 +205,7 @@ const MakePage = () => {
                     </label>
                     <div className="relative">
                       <input
-                        type="text"
+                        type="number"
                         id="age"
                         value={age}
                         onChange={handleAgeChange}
