@@ -147,9 +147,9 @@ const MakePage = () => {
               <h2 className="text-center text-2xl text-white mb-4 pb-12">
                 詳細情報を設定してください。
               </h2>
-              <div className="flex items-center">
+              <div className="flex items-center gap-16">
                 <div className="">
-                  <div className="flex justify-center pr-5">
+                  <div className="flex justify-center">
                     <div className="mb-4 bg-slate-400">
                       <label htmlFor="file" className="block text-white bg-black border-2 border-gray-200">
                         Select Image (PNG only):
@@ -160,12 +160,13 @@ const MakePage = () => {
                         accept="image/png"
                         onChange={handleFileSelect}
                         className="w-full bg-black border-2 border-gray-200"
+                        required
                       />
                     </div>
                   </div>
                   <div className="">
                     {selectedFile ? (
-                      <div className="flex items-center justify-center">
+                      <div className="flex items-center justify-center bg-white">
                         <img
                           src={selectedFile}
                           alt="Selected"
@@ -173,7 +174,7 @@ const MakePage = () => {
                         />
                       </div>
                     ) : (
-                      <div className="pr-5">
+                      <div className="">
                         <div className="w-full h-40 border-dashed border-2 border-gray-400 flex items-center justify-center">
                           <span className="text-gray-400">No image selected</span>
                         </div>
