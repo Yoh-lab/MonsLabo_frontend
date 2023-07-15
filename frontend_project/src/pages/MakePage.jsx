@@ -190,6 +190,7 @@ const MakePage = () => {
                     <div className="relative">
                       <input
                         type="text"
+                        autoComplete="off"
                         id="name"
                         value={name}
                         onChange={handleNameChange}
@@ -206,6 +207,7 @@ const MakePage = () => {
                     <div className="relative">
                       <input
                         type="number"
+                        autoComplete="off"
                         id="age"
                         value={age}
                         onChange={handleAgeChange}
@@ -222,6 +224,7 @@ const MakePage = () => {
                     <div className="relative">
                       <input
                         type="text"
+                        autoComplete="off"
                         id="gender"
                         value={gender}
                         onChange={handleGenderChange}
@@ -238,6 +241,7 @@ const MakePage = () => {
                     <div className="relative">
                       <input
                         type="text"
+                        autoComplete="off"
                         id="race"
                         value={race}
                         onChange={handleRaceChange}
@@ -254,6 +258,7 @@ const MakePage = () => {
                     <div className="relative">
                       <input
                         type="text"
+                        autoComplete="off"
                         id="hobby"
                         value={hobby}
                         onChange={handleHobbyChange}

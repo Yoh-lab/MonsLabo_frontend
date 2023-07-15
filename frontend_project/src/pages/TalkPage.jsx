@@ -143,7 +143,7 @@ const TalkPage = () => {
         <div className="mt-2 w-screen">
           <textarea
             className="w-3/5 h-40 px-4 py-2 border border-gray-300 rounded-lg bg-gradient-to-t from-gray-400 to-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent te"
-            value={responseData || "No response"}
+            value={responseData || "５回会話を行なって，，モンスターの育成を行なってください．"}
             readOnly // 入力禁止にする
           ></textarea>
         </div>
