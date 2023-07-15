@@ -1,6 +1,5 @@
 import LogIn from "../components/LogIn";
-import Frame_468 from "../assets/Frame_468.png";
-import Icon_backBlack from "../assets/Icon_backBlack.png";
+import BackIcon from "../assets/BackGroundImage.png";
 
 
 const HomePage = () => {
@@ -15,7 +14,7 @@ const HomePage = () => {
     <div
       className="flex flex-col items-center justify-center w-screen"
       style={{
-        backgroundImage: `url(${Frame_468})`,
+        backgroundImage: `url(${BackIcon})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}
@@ -29,15 +28,15 @@ const HomePage = () => {
             全ては、1つのタネから。
           </Typography>
         </div> */}
-          <div>
+          {/* <div>
             <image
               src={Icon_backBlack}
               className="w-72 xl:w-full h-24 xl:h-40 mx-auto mb-8"
             />
-          </div>
+          </div> */}
         </section>
-        <section className="min-h-screen flex items-center justify-center py-20 text-dark dark:text-light">
-          <div>
+        <section className="w-screen min-h-screen flex items-center justify-center py-20 text-dark dark:text-light">
+          <div className="border-r-gray-600 border-r-8 border-b-gray-600 border-b-8 bg-gray-400 p-10 pt-16 pb-16 mb-10 w-2/6">
             <LogIn />
           </div>
         </section>
