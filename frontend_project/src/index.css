@@ -59,6 +59,25 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+button2 {
+  border-radius: 8px;
+  border: 1px solid #e947f1;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #000000;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button2:hover {
+  border-color: #646cff;
+}
+button2:focus,
+button2:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -70,13 +89,13 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
 
-  @font-face {
-    font-family: DotGothic16;
-    src: url(./fonts/DotGothic16-Regular.ttf);
-  }
+@font-face {
+  font-family: Space Invaders, DotGothic16, Arial;
+  src: url(./fonts/space_invaders.ttf), url(./fonts/DotGothic16-Regular.ttf);
+}
 
-  h2{
-    font-family: DotGothic16;
-  }
+h2{
+  font-family: Space Invaders, DotGothic16, Arial;
 }
