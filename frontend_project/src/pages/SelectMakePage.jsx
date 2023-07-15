@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import SettingButton from "../components/SettingButton";
+import plant_img from "../assets/plant.png";
 
 const SelectMakePage = () => {
   const navigate = useNavigate();
@@ -16,20 +17,29 @@ const SelectMakePage = () => {
   return (
     <div>
       <SettingButton />
-      <div className="flex flex-col items-center justify-center w-screen h-screen">
-        <h1 className="text-4xl mb-8">キャラ作成の方法を選択してください</h1>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
-          onClick={handletoPaintPage}
-        >
-          自分でイラストを描く
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleToCheckPage}
-        >
-          既存の画像を使う
-        </button>
+      <div
+        className="flex flex-col items-center justify-center w-screen h-screen"
+        style={{
+          backgroundImage: `url(${plant_img})`,
+          backgroundSize: "cover",
+        }}
+      >
+        <div className="text-white flex flex-col w-3/5 justify-center items-center gap-5">
+          <h2 className="text-7xl mb-2">モンスター作成</h2>
+          <h2 className="text-3xl mb-20">作成方法を選択してください</h2>
+          <button
+            className="w-3/5 m-6 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+            onClick={handletoPaintPage}
+          >
+            <h2 className="text-4xl m-2">自分でイラストを描く</h2>
+          </button>
+            <button
+              className="w-3/5 m-6 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+              onClick={handleToCheckPage}
+            >
+              <h2 className="text-4xl m-2">既存の画像を使う</h2>
+            </button>
+        </div>
       </div>
     </div>
   );

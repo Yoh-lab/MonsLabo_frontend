@@ -1,8 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import paint_img from "../assets/paintpic.png";
-import Button from '@mui/material/Button';
 import SettingButton from "../components/SettingButton";
+import plant_img from "../assets/plant.png";
 
 const PaintPage = () => {
   const canvasRef = useRef(null);
@@ -63,14 +62,20 @@ const PaintPage = () => {
 
   const undoDrawing = () => {
     if (previousDrawings.length > 0) {
-      setRedoDrawings((redo) => [...redo, previousDrawings[previousDrawings.length - 1]]);
+      setRedoDrawings((redo) => [
+        ...redo,
+        previousDrawings[previousDrawings.length - 1],
+      ]);
       setPreviousDrawings((drawings) => drawings.slice(0, -1));
     }
   };
 
   const redoDrawing = () => {
     if (redoDrawings.length > 0) {
-      setPreviousDrawings((drawings) => [...drawings, redoDrawings[redoDrawings.length - 1]]);
+      setPreviousDrawings((drawings) => [
+        ...drawings,
+        redoDrawings[redoDrawings.length - 1],
+      ]);
       setRedoDrawings((redo) => redo.slice(0, -1));
     }
   };
@@ -106,54 +111,96 @@ const PaintPage = () => {
   return (
     <div>
       <SettingButton />
-      <div>
-        {shouldNavigate && <Navigate to="/make" replace />}
-        <div
-          className="bg-blue-400 w-screen h-screen flex flex-col items-center justify-center space-y-5"
-          style={{
-            backgroundImage: `url(${paint_img})`,
-            backgroundSize: "cover",
-          }}
-        >
-          <div className="flex justify-center space-x-10">
-            <div className="bg-slate-200 flex items-center">
-              <label htmlFor="color">ペンの色:</label>
-              <input
-                type="color"
-                id="color"
-                value={penColor}
-                onChange={handleColorChange}
+      <div
+        className="flex flex-col items-center justify-center w-screen h-screen"
+        style={{
+          backgroundImage: `url(${plant_img})`,
+          backgroundSize: "cover",
+        }}
+      >
+        <div>
+          {shouldNavigate && <Navigate to="/make" replace />}
+          <div className="text-white justify-center items-center">
+            <h2 className="text-4xl mb-10 ">
+              会話するモンスターを描いてください
+            </h2>
+          </div>
+          <div className="gap-32 flex justify-center">
+            <div className=" border-2 bg-white">
+              <canvas
+                ref={canvasRef}
+                onMouseDown={startDrawing}
+                onMouseMove={draw}
+                onMouseUp={stopDrawing}
+                onMouseLeave={stopDrawing}
               />
             </div>
-            <div className="bg-slate-200 flex items-center">
-              <label htmlFor="size">ペンの太さ:</label>
-              <input
-                type="number"
-                id="size"
-                min="1"
-                max="10"
-                value={penSize}
-                onChange={handleSizeChange}
-              />
+
+            <div className="flex flex-col justify-center items-center">
+              <div className="bg-slate-200 w-72 mb-12 flex justify-center gap-12">
+                <div className="bg-slate-200 flex items-center">
+                  <label htmlFor="color">ペンの色:</label>
+                  <input
+                    type="color"
+                    id="color"
+                    value={penColor}
+                    onChange={handleColorChange}
+                  />
+                </div>
+                <div className="bg-slate-200 flex items-center">
+                  <label htmlFor="size">ペンの太さ:</label>
+                  <input
+                    type="number"
+                    id="size"
+                    min="1"
+                    max="10"
+                    value={penSize}
+                    onChange={handleSizeChange}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-32 flex justify-center  ">
+                  <button
+                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                    onClick={clearCanvas}
+                  >
+                    <h2 className="text-2xl w-28 m-0">クリア</h2>
+                  </button>
+                  <button
+                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                    onClick={undoDrawing}
+                  >
+                    <h2 className="text-2xl w-28 m-0">1つ戻る</h2>
+                  </button>
+                </div>
+                <div className="w-32 flex justify-center">
+                  <button
+                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                    onClick={redoDrawing}
+                  >
+                    <h2 className="text-2xl w-28 m-0">1つ進める</h2>
+                  </button>
+                  <button
+                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                    onClick={eraseDrawing}
+                  >
+                    <h2 className="text-2xl w-28 m-0">消しゴム</h2>
+                    
+                  </button>
+                </div>
+
+                {/* <button onClick={() => setShouldNavigate(true)}>作成</button> */}
+              </div>
+              <div>
+                <button
+                  className="mt-24 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                  onClick={saveImage}
+                >
+                  <h2 className="text-3xl w-64 m-0">保存 ＆ キャラ作成</h2>
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="border-2 bg-white">
-            <canvas
-              ref={canvasRef}
-              onMouseDown={startDrawing}
-              onMouseMove={draw}
-              onMouseUp={stopDrawing}
-              onMouseLeave={stopDrawing}
-            />
-          </div>
-          <div className="flex justify-center space-x-5">
-            <button onClick={clearCanvas}>クリア</button>
-            <button onClick={undoDrawing}>一つ戻す</button>
-            <button onClick={redoDrawing}>一つ進める</button>
-            <button onClick={eraseDrawing}>消しゴム</button>
-            <button onClick={saveImage}>保存 & キャラ作成</button>
-            <Button variant="contained">Outlined</Button>
-            {/* <button onClick={() => setShouldNavigate(true)}>作成</button> */}
           </div>
         </div>
       </div>
