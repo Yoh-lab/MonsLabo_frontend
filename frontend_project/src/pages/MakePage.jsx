@@ -275,8 +275,8 @@ const MakePage = () => {
               </div>
             </form>
             {showModal && (
-              <div className="bg-gray-600 bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
-                <div className="bg-white p-4 rounded">
+              <div className="bg-white bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
+                <div className="bg-black p-4 rounded border-2 border-yellow-400">
                   <h3 className="text-xl mb-2">Confirmation Dialog</h3>
                   <p>このキャラクターを登録しますか？</p>
                   <div className="mt-4 flex justify-end">
