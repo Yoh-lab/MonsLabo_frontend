@@ -30,11 +30,11 @@ function App() {
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
           primary: {
-            main: "#ed63f2",
-            extraDark: "#c06d76",
+            main: "#f0fff2",
+            extraDark: "#a936e3",
             dark: "#c76672",
             light: "#ec939d",
-            extraLight: "#EBF4FB",
+            extraLight: "#d13bcc",
             alpha08: "#0077C714",
           },
           noticeRed: {

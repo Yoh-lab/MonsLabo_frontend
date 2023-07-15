@@ -141,9 +141,9 @@ const PaintPage = () => {
             </div>
 
             <div className="flex flex-col justify-center items-center">
-              <h2 className="border-2 border-yellow-400 bg-slate-200 w-80 mb-12 flex justify-center gap-8">
-                <div className="bg-slate-200 flex items-center">
-                  <label htmlFor="color">ペンの色:</label>
+              <h2 className="border-2 border-yellow-400  bg-slate-200 dark:bg-gray-500 w-80 mb-12 flex justify-center gap-8">
+                <div className="flex items-center">
+                  <label htmlFor="color" className="mr-2">ペンの色: </label>
                   <input
                     type="color"
                     id="color"
@@ -152,9 +152,10 @@ const PaintPage = () => {
                   />
                 </div>
 
-                <div className="bg-slate-200 flex items-center">
-                  <label htmlFor="size">ペンの太さ:</label>
+                <div className=" flex items-center">
+                  <label htmlFor="size" className="mr-2">ペンの太さ: </label>
                   <input
+                  className="bg-white text-right text-black"
                     type="number"
                     id="size"
                     min="1"
