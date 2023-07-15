@@ -161,33 +161,35 @@ const PaintPage = () => {
               </div>
               <div className="flex flex-col items-center">
                 <div className="w-32 flex justify-center  ">
-                  <button
-                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
-                    onClick={clearCanvas}
-                  >
-                    <h2 className="text-2xl w-28 m-0">クリア</h2>
-                  </button>
-                  <button
-                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
-                    onClick={undoDrawing}
-                  >
-                    <h2 className="text-2xl w-28 m-0">1つ戻る</h2>
-                  </button>
-                </div>
-                <div className="w-32 flex justify-center">
-                  <button
-                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
-                    onClick={redoDrawing}
-                  >
-                    <h2 className="text-2xl w-28 m-0">1つ進める</h2>
-                  </button>
-                  <button
+                <button
                     className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
                     onClick={eraseDrawing}
                   >
                     <h2 className="text-2xl w-28 m-0">消しゴム</h2>
                     
                   </button>
+                  <button
+                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                    onClick={clearCanvas}
+                  >
+                    <h2 className="text-2xl w-28 m-0">クリア</h2>
+                  </button>
+                </div>
+                <div className="w-32 flex justify-center">
+
+                <button
+                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                    onClick={undoDrawing}
+                  >
+                    <h2 className="text-2xl w-28 m-0">1つ戻る</h2>
+                  </button>
+                  <button
+                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                    onClick={redoDrawing}
+                  >
+                    <h2 className="text-2xl w-28 m-0">1つ進める</h2>
+                  </button>
+
                 </div>
 
                 {/* <button onClick={() => setShouldNavigate(true)}>作成</button> */}
