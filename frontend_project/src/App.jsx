@@ -30,7 +30,7 @@ function App() {
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
           primary: {
-            main: "#df929b",
+            main: "#fff7ff",
             extraDark: "#c06d76",
             dark: "#c76672",
             light: "#ec939d",

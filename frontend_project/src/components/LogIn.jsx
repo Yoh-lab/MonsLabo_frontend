@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { auth } from "../firebase/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { TextField, Button, Box, Typography, Alert } from "@mui/material";
+// import { TextField, Button, Box, Typography, Alert } from "@mui/material";
+import { TextField, Box, Alert } from "@mui/material";
 
 // LogInコンポーネントの定義
 const LogIn = () => {
@@ -42,10 +43,11 @@ const LogIn = () => {
             {user ? (
                 <Navigate to="/selectMode" replace /> // ユーザーがログインしている場合、Navigateコンポーネントを使用して指定のURLにリダイレクト
             ) : (
-                <>
-                    <Typography component="h1" variant="h3">
+                <h2>
+                    {/* <Typography component="h1" variant="h3">
                         Sign In
-                    </Typography>
+                    </Typography> */}
+                    <h2 className="text-6xl mb-6 text-gray-800"> Sign In</h2>
                     <Box
                         component="form"
                         onSubmit={handleSubmit}
@@ -78,24 +80,23 @@ const LogIn = () => {
                                 setSignInPassword(event.target.value)
                             }
                         />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 4, mx: "auto" }}
-                        >
-                            Log In
-                        </Button>
+                        <button
+                  type="submit"
+                  className="mt-4 mb-8 w-full border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                >
+                  Log In
+                </button>
                     </Box>
                     {error && (
                         <Alert severity="error" sx={{ mt: 2 }}>
                             {error}
                         </Alert>
                     )}
-                    <Typography variant="body2" sx={{ mt: 2 }}>
+                    {/* <Typography variant="body2" sx={{ mt: 2 }}>
                         新規ユーザ登録は<Link to="/signup">こちら</Link>
-                    </Typography>
-                </>
+                    </Typography> */}
+                    <h2 className="text-1xl mb-2 text-gray-800"> 新規ユーザ登録は<Link to="/signup">こちら</Link></h2>
+                </h2>
             )}
         </>
     );
