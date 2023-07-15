@@ -47,8 +47,8 @@ const SelectModePage = () => {
         }}
       >
         <div className="text-white flex flex-col w-3/5 justify-center items-center gap-5">
-          <h2 className="text-7xl mb-2">モンスターゲーム</h2>
-          <h2 className="text-3xl mb-20">作成方法を選択してください</h2>
+          <h2 className="text-7xl mb-2">モード選択</h2>
+          <h2 className="text-3xl mb-20">遊び方を選択してください</h2>
           <button
             className="w-3/5 m-6 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
             onClick={handleCreateMonster}
@@ -64,8 +64,11 @@ const SelectModePage = () => {
             </button>
           ) : (
             // １体もモンスターがいない場合はモンスターと会話ボタンを薄くして、クリックできないようにする
-            <button className="bg-red-200 hover:bg-red-300 text-white font-bold py-2 px-4 rounded">
-              モンスターと会話
+            <button
+              className="w-3/5 m-6 border-0 border-Fuchsia-500 bg-gray-400 bg-opacity-40 text-gray-400 text-opacity-50 py-2  transition duration-300"
+              onClick={null}
+            >
+              <h2 className="text-4xl m-2">作ったモンスターと会話</h2>
             </button>
           )}
         </div>
