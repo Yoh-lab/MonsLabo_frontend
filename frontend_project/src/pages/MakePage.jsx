@@ -265,12 +265,12 @@ const MakePage = () => {
                 </div>
               </div>
               <div className="pt-20">
-                <button2
+                <button
                   type="submit"
                   className="w-1/2 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
                 >
                   登録
-                </button2>
+                </button>
               </div>
             </form>
             {showModal && (
@@ -287,7 +287,7 @@ const MakePage = () => {
                     </button>
                     <button
                       onClick={handleRegister}
-                      className="bg-blue-500 text-white px-4 py-2 rounded"
+                      className="text-white px-4 py-2 rounded"
                     >
                       OK!
                     </button>
