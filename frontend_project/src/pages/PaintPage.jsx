@@ -1,6 +1,5 @@
 import { useRef, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import Button from "@mui/material/Button";
 import SettingButton from "../components/SettingButton";
 import plant_img from "../assets/plant.png";
 
