@@ -136,23 +136,33 @@ const TalkPage = () => {
         className="flex flex-col items-center w-screen h-screen justify-center"
         style={{ backgroundImage: `url(${talk_img})`, backgroundSize: "cover" }}
       >
-        <div className="border-2 bg-white">
-          <img src={image_url} className="max-w-lg max-h-96" />
+        <div className="border-2 bg-white w-1/3 h-2/5 flex justify-center items-center">
+          {image_url ? (
+            <img src={image_url} className="max-h-72" alt="Image" />
+          ) : (
+            <div className="text-center">
+              <img
+                src="none.png"
+                className="max-h-72"
+              />
+              <p>No Image</p>
+            </div>
+          )}
         </div>
-        <h2>
+        <h2 className="pt-2">
         <div className="mt-2 w-screen">
           <textarea
-            className="w-3/5 h-40 px-4 py-2 border border-gray-300 rounded-lg bg-gradient-to-t from-gray-400 to-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent te"
+            className="w-3/5 h-40 px-4 py-2 border border-gray-300 rounded-lg bg-gradient-to-t from-gray-400 to-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             value={responseData || "５回会話を行なって，，モンスターの育成を行なってください．"}
             readOnly // 入力禁止にする
           ></textarea>
         </div>
         </h2>
-        <div className="my-2"></div> {/* 余白を追加 */}
+        <div className="my-2  pt-4"></div> {/* 余白を追加 */}
         {/* 会話のログが５往復以内なら、育成中の文字を追加 */}
         <div className="relative w-3/5">
         {num_response < 5 ? (
-          <h2 className="absolute top-0 left-0 bg-black text-white border-2 border-gray-300 px-2 rounded">
+          <h2 className="absolute top-0 left-0 bg-black text-white border-2 border-gray-300 rounded">
             育成中（{num_response}/5回）
           </h2>
         ) : (
@@ -161,7 +171,7 @@ const TalkPage = () => {
           </h2>
         )}
         <h2>
-        <form className="my-4 flex items-center pt-2" onSubmit={isLoading == false ? (num_response < 5 ? handleTrainingSubmit : handleTalkSubmit) : null}>
+        <form className="my-4 flex items-center justify-center pt-2" onSubmit={isLoading == false ? (num_response < 5 ? handleTrainingSubmit : handleTalkSubmit) : null}>
           <textarea
             className="flex-grow h-10 px-4 py-2 border-2 border-gray-300 mr-2 pl-8"
             placeholder="例）こんにちは"
