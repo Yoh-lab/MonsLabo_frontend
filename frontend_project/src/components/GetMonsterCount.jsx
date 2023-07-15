@@ -3,7 +3,7 @@ import { collection } from "firebase/firestore";
 import { getDocs } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-const GetMonsterId = async() => {
+const GetMonsterCount = async() => {
     const auth = getAuth();
     const user = auth.currentUser;
     if (user) {
@@ -30,10 +30,12 @@ const GetMonsterId = async() => {
           error
         );
         console.log(error.message);
+        return 0;
       }
     } else {
       console.log("サインインしていません。");
+      return 0;
     }
   };
 
-export default GetMonsterId
+export default GetMonsterCount

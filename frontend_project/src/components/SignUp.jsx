@@ -54,7 +54,7 @@ const SignUp = () => {
         <>
             {user ? (
                 // ユーザーがログインしている場合、Navigateコンポーネントを使用して指定のURLにリダイレクト
-                <Navigate to={`/selectMake`} />
+                <Navigate to={`/selectMode`} />
             ) : (
                 <>
                     <Typography component="h1" variant="h3">
