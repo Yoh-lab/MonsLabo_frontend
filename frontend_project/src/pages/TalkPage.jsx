@@ -173,7 +173,7 @@ const TalkPage = () => {
         <h2>
         <form className="my-4 flex items-center justify-center pt-2" onSubmit={isLoading == false ? (num_response < 5 ? handleTrainingSubmit : handleTalkSubmit) : null}>
           <textarea
-            className="flex-grow dark:text-black h-10 px-4 py-2 border-2 border-gray-300 mr-2 pl-8"
+            className="flex-grow dark:text-black bg-white h-10 px-4 py-2 border-2 border-gray-300 mr-2 pl-8"
             placeholder="例）こんにちは"
             value={formInput}
             onChange={handleInputChange}
