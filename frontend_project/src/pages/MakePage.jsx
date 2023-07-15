@@ -191,11 +191,12 @@ const MakePage = () => {
                       <input
                         type="text"
                         autoComplete="off"
+                        maxLength={8}
                         id="name"
                         value={name}
                         onChange={handleNameChange}
                         className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="例）竜王"
+                        placeholder="例）竜王 (8文字以内)"
                         required
                       />
                     </div>
@@ -208,6 +209,7 @@ const MakePage = () => {
                       <input
                         type="number"
                         autoComplete="off"
+                        maxLength={8}
                         id="age"
                         value={age}
                         onChange={handleAgeChange}
@@ -281,7 +283,7 @@ const MakePage = () => {
             </form>
             {showModal && (
               <div className="bg-white bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
-                <div className="bg-black p-4 rounded border-2 border-yellow-400">
+                <div className="bg-black text-white p-4 rounded border-2 border-yellow-400">
                   <h3 className="text-xl mb-2">Confirmation Dialog</h3>
                   <p>このキャラクターを登録しますか？</p>
                   <div className="mt-4 flex justify-end">

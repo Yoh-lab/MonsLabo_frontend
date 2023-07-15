@@ -75,16 +75,18 @@ const SelectMonsterPage = () => {
               <div className="flex flex-row justify-center pt-5 pb-5 flex-wrap gap-5">
               {Object.keys(getData).map((key) => (
                 <div key={key} className="flex w-1/6 bg-white flex-col items-center justify-center">
-                  <div className="flex-grow">
+                  <div className="flex flex-grow flex-col items-center justify-center">
                     <img
                       src={getData[key].image_url}
-                      className="max-h-40"
+                      className="max-h-36 px-2 py-2"
                       style={{ width: "100%",height: "auto" }}
                     />
                   </div>
-                  <button onClick={() => handleModalOpen(key)}>
-                    {getData[key].name}
-                  </button>
+                  <div className="pb-2 px-2">
+                    <button onClick={() => handleModalOpen(key)}>
+                      {getData[key].name}
+                    </button>
+                  </div>
                 </div>
               ))}
               </div>
