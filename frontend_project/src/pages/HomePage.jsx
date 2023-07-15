@@ -2,7 +2,10 @@ import LogIn from "../components/LogIn";
 import Frame_468 from "../assets/Frame_468.png";
 import Icon_backBlack from "../assets/Icon_backBlack.png";
 
+
 const HomePage = () => {
+
+
   return (
     // <div className="flex flex-col items-center justify-end h-screen w-screen">
     //   <div className="bg-gray-400 p-10 pt-16 pb-16 mb-10 w-2/6 ">
