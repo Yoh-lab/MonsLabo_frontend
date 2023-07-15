@@ -14,7 +14,7 @@ import SignUpPage from "./pages/SignUpPage";
 import SelectModePage from "./pages/SelectModePage";
 import SelectMonsterPage from "./pages/SelectMonsterPage";
 import TestPage from "./pages/TestPage";
-import SelectMakePage from "./pages/selectMakePage";
+import SelectMakePage from "./pages/SelectMakePage";
 // import TestPage from "./pages/TestPage";
 
 function App() {
