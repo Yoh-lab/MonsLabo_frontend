@@ -7,8 +7,9 @@ import { getDownloadURL } from "firebase/storage";
 // import { database } from "../firebase/firebase";
 import CircularProgress from "@mui/material/CircularProgress";
 import HandleSendData from "../components/sendNewMonster";
-import GetMonsterId from "../components/GetMonsterId";
-import plant_img from "../assets/plant.png";
+import GetMonsterCount from "../components/GetMonsterCount";
+import space_img from "../assets/space.png";
+import SettingButton from "../components/SettingButton";
 
 const MakePage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -67,7 +68,7 @@ const MakePage = () => {
     event.preventDefault();
     setIsLoading(true);
     // モンスターIDを取得する
-    const monsterId = await GetMonsterId();
+    const monsterId = await GetMonsterCount();
     const auth = getAuth();
     const user = auth.currentUser;
     // 画像をFirebase Storageにアップロードする
@@ -102,77 +103,52 @@ const MakePage = () => {
         try {
           navigate("/talk", {
             state: {
-              selectedFile,
-              monsterId: String(0),
-              name,
+              // selectedFile: selectedFile,
+              monsterId: monsterId.toString().padStart(3, "0"),
+              name: name,
               age: String(age),
               gender: gender,
-              hobby,
-              race,
+              hobby: hobby,
+              race: race,
               _logInput: [],
               _logOutput: [],
               num_response: "0",
-              image_url,
+              image_url: image_url,
             },
           });
         } catch (error) {
           console.log("画像のURL取得時にエラーが発生しました。", error);
+          setIsLoading(false);
         }
       });
     } catch (error) {
       console
         .log("画像のアップロード時にエラーが発生しました。", error)
+        setIsLoading(false);
     }
-    setIsLoading(false);
 
-    //await database.collection("RdeJHrhbb8WrVeQjUserGFT4aA13").doc("monster1").add(characterData);
-
-    // navigate("/talk", { state: { selectedFile, monsterId, name, age, gender, hobby, race, num_response, image_url} });
   };
 
-  // const [isLoading, setIsLoading] = useState(false);
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   setIsLoading(true);
-
-  //   try {
-  //     // Firestoreにデータを格納
-  //     await database.collection("users").doc("RdeJHrhbb8WrVeQjUserGFT4aA13").collection("users").add({
-  //       name,
-  //       gender,
-  //       hobby,
-  //     });
-  //     // 格納が完了したら以下のコードを実行する
-  //     {/*グルグルマーク*/}
-  //     <CircularProgress />
-  //     // navigate("/talk", { state: { selectedFile } });
-  //   } catch (error) {
-  //     console.error("Firestoreへの格納中にエラーが発生しました。", error);
-  //   }
-
-  //   setIsLoading(false);
-  // };
 
   return (
-    <div
-      className="flex flex-col items-center w-screen h-screen justify-end"
-      style={{ backgroundImage: `url(${plant_img})`, backgroundSize: "cover" }}
-    >
-    <h2 className="text-center">
+
+    <div>
+      <SettingButton />
+      <div
+        className="flex flex-col items-center w-screen h-screen justify-end"
+        style={{ backgroundImage: `url(${space_img})`, backgroundSize: "cover" }}
+      >
+      <h2 className="text-center">
       <div className="flex items-center justify-center h-screen w-screen">
         <form onSubmit={handleModalOpen}>
-          <h2 className="text-center text-6xl text-white mb-4 pb-2">
-          モンスター登録
-          </h2>
-          <h2 className="text-center text-2xl text-white mb-4 pb-12">
-            詳細情報を設定してください。
+          <h2 className="text-center text-2xl text-white bg-gray-900 mb-4">
+            キャラの情報を登録してください。
           </h2>
           <div className="flex items-center">
             <div className="">
-              <div className="flex justify-center pr-5">
+              <div className="flex justify-center">
                 <div className="mb-4 bg-slate-400">
-                  <label htmlFor="file" className="block text-white bg-black border-2 border-gray-200">
+                  <label htmlFor="file" className="block">
                     Select Image (PNG only):
                   </label>
                   <input
@@ -180,31 +156,23 @@ const MakePage = () => {
                     id="file"
                     accept="image/png"
                     onChange={handleFileSelect}
-                    className="w-full bg-black border-2 border-gray-200"
+                    className="w-full"
                   />
                 </div>
               </div>
-              <div className="">
-                {selectedFile ? (
-                  <div className="flex items-center justify-center">
-                    <img
-                      src={selectedFile}
-                      alt="Selected"
-                      className="max-w-xs h-40 rounded-lg"
-                    />
-                  </div>
-                ) : (
-                  <div className="pr-5">
-                    <div className="w-full h-40 border-dashed border-2 border-gray-400 flex items-center justify-center">
-                      <span className="text-gray-400">No image selected</span>
-                    </div>
-                  </div>
-                )}
-              </div> 
+              {selectedFile && (
+                <div className="border-4">
+                  <img
+                    src={selectedFile}
+                    alt="Selected"
+                    className="max-w-full"
+                  />
+                </div>
+              )}
             </div>
             <div className="">
-              <div className="mb-4 flex">
-                <label htmlFor="name" className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg">
+              <div className="mb-4">
+                <label htmlFor="name" className="block text-xl font-bold mb-2">
                   名前
                 </label>
                 <div className="relative">
@@ -213,86 +181,67 @@ const MakePage = () => {
                     id="name"
                     value={name}
                     onChange={handleNameChange}
-                    className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border-4 border-gold bg-gray-800 text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="入力してください"
-                    required
                   />
                 </div>
               </div>
-              <div className="mb-4 flex">
-                <label htmlFor="age" className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg">
+              <div className="mb-4">
+                <label htmlFor="name" className="block">
                   年齢
                 </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="age"
-                    value={age}
-                    onChange={handleAgeChange}
-                    className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="入力してください"
-                    required
-                  />
-                </div>
+                <input
+                  type="text"
+                  id="name"
+                  value={age}
+                  onChange={handleAgeChange}
+                  className="w-full border border-gray-300 rounded px-2 py-1"
+                />
               </div>
-              <div className="mb-4 flex">
-                <label htmlFor="gender" className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg">
+              <div className="mb-4">
+                <label htmlFor="gender" className="block">
                   性別
                 </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="gender"
-                    value={gender}
-                    onChange={handleGenderChange}
-                    className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="入力してください"
-                    required
-                  />
-                </div>
+                <input
+                  type="text"
+                  id="gender"
+                  value={gender}
+                  onChange={handleGenderChange}
+                  className="w-full border border-gray-300 rounded px-2 py-1"
+                />
               </div>
-              <div className="mb-4 flex">
-                <label htmlFor="race" className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg">
+              <div className="mb-4">
+                <label htmlFor="race" className="block">
                   種族
                 </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="race"
-                    value={race}
-                    onChange={handleRaceChange}
-                    className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="入力してください"
-                    required
-                  />
-                </div>
+                <input
+                  type="text"
+                  id="race"
+                  value={race}
+                  onChange={handleRaceChange}
+                  className="w-full border border-gray-300 rounded px-2 py-1"
+                />
               </div>
-              <div className="mb-4 flex">
-                <label htmlFor="hobby" className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg">
+              <div className="mb-4">
+                <label htmlFor="hobby" className="block">
                   趣味
                 </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="hobby"
-                    value={hobby}
-                    onChange={handleHobbyChange}
-                    className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="入力してください"
-                    required
-                  />
-                </div>
+                <input
+                  type="text"
+                  id="hobby"
+                  value={hobby}
+                  onChange={handleHobbyChange}
+                  className="w-full border border-gray-300 rounded px-2 py-1"
+                />
               </div>
             </div>
           </div>
-          <div className="pt-20">
-            <button2
-              type="submit"
-              className="w-1/2 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
-            >
-              登録
-            </button2>
-          </div>
+          <button
+            type="submit"
+            className="w-full bg-gray-900 text-white rounded-lg py-2 hover:bg-gray-700 transition duration-300"
+          >
+            登録
+          </button>
         </form>
         {showModal && (
           <div className="bg-gray-600 bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
@@ -307,7 +256,7 @@ const MakePage = () => {
                   Cancel
                 </button>
                 <button
-                  onClick={handleRegister}
+                  onClick={isLoading==false ? handleRegister : null}
                   className="bg-blue-500 text-white px-4 py-2 rounded"
                 >
                   OK!
@@ -323,6 +272,7 @@ const MakePage = () => {
         )}
       </div>
       </h2>
+      </div>
     </div>
   );
 };
