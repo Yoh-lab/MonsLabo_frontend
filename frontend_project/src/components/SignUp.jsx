@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { auth } from "../firebase/firebase";
 import {createUserWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
-import { TextField, Button, Box, Typography, Snackbar } from "@mui/material";
+// import { TextField, Button, Box, Typography, Snackbar } from "@mui/material";
+import { TextField, Box, Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 
 const SignUp = () => {
@@ -56,10 +57,11 @@ const SignUp = () => {
                 // ユーザーがログインしている場合、Navigateコンポーネントを使用して指定のURLにリダイレクト
                 <Navigate to={`/selectMode`} />
             ) : (
-                <>
-                    <Typography component="h1" variant="h3">
+                <h2>
+                    {/* <Typography component="h1" variant="h3">
                         Sign Up
-                    </Typography>
+                    </Typography> */}
+                    <h2 className="text-6xl mb-6 text-gray-800"> Sign Up</h2>
                     <Box
                         component="form"
                         onSubmit={handleSignUp}
@@ -93,18 +95,17 @@ const SignUp = () => {
                                 setSignUpPassword(event.target.value)
                             }
                         />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 4, mx: "auto" }}
-                        >
-                            Sign Up
-                        </Button>
+                        <button
+                  type="submit"
+                  className="mt-4 mb-8 w-full border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                >
+                  Log Up
+                </button>
                     </Box>
-                    <Typography variant="body2" sx={{ mt: 2 }}>
+                    {/* <Typography variant="body2" sx={{ mt: 2 }}>
                         ログインは<Link to={"/"}>こちら</Link>
-                    </Typography>
+                    </Typography> */}
+                    <h2 className="text-1xl mb-2 text-gray-800"> ログインは<Link to={"/"}>こちら</Link></h2>
                     <Snackbar
                         open={hasError}
                         autoHideDuration={6000}
@@ -119,7 +120,7 @@ const SignUp = () => {
                             {errorMessage}
                         </MuiAlert>
                     </Snackbar>
-                </>
+                </h2>
             )}
         </>
     );

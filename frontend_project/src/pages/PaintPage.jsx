@@ -2,6 +2,10 @@ import { useRef, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import SettingButton from "../components/SettingButton";
 import plant_img from "../assets/plant.png";
+import Eraser from "../assets/Eraser.png";
+import Pencil from "../assets/Pencil.png";
+import ArrowBack from "../assets/ArrowBack.png";
+import ArrowGo from "../assets/ArrowGo.png";
 
 const PaintPage = () => {
   const canvasRef = useRef(null);
@@ -147,7 +151,7 @@ const PaintPage = () => {
                     onChange={handleColorChange}
                   />
                 </div>
-      
+
                 <div className="bg-slate-200 flex items-center">
                   <label htmlFor="size">ペンの太さ:</label>
                   <input
@@ -159,39 +163,55 @@ const PaintPage = () => {
                     onChange={handleSizeChange}
                   />
                 </div>
-        
               </h2>
               <div className="flex flex-col items-center">
-                <div className="w-32 flex justify-center  ">
-                <button
-                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                <div className="w-44 flex justify-center  ">
+                  <button
+                    className="flex items-center w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
                     onClick={eraseDrawing}
                   >
-                    <h2 className="text-2xl w-28 m-0">消しゴム</h2>
-                    
+                    <img
+                      src={Eraser}
+                      alt="Click to Sign Out"
+                      className="w-1/5 mr-2"
+                    />
+                    <h2 className="text-2xl w-36 m-0">消しゴム</h2>
                   </button>
                   <button
-                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                    className="flex items-center w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
                     onClick={clearCanvas}
                   >
-                    <h2 className="text-2xl w-28 m-0">クリア</h2>
+                    <img
+                      src={Pencil}
+                      alt="Click to Sign Out"
+                      className="w-1/5 mr-2"
+                    />
+                    <h2 className="text-2xl w-36 m-0">クリア</h2>
                   </button>
                 </div>
                 <div className="w-32 flex justify-center">
-
-                <button
-                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                  <button
+                    className="flex items-center w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
                     onClick={undoDrawing}
                   >
-                    <h2 className="text-2xl w-28 m-0">1つ戻る</h2>
+                    <img
+                      src={ArrowBack}
+                      alt="Click to Sign Out"
+                      className="w-1/5 mr-2"
+                    />
+                    <h2 className="text-2xl w-36 m-0">1つ戻る</h2>
                   </button>
                   <button
-                    className="w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                    className="flex items-center w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
                     onClick={redoDrawing}
                   >
-                    <h2 className="text-2xl w-28 m-0">1つ進める</h2>
+                    <img
+                      src={ArrowGo}
+                      alt="Click to Sign Out"
+                      className="w-1/5 mr-2"
+                    />
+                    <h2 className="text-2xl w-36 m-0">1つ進める</h2>
                   </button>
-
                 </div>
 
                 {/* <button onClick={() => setShouldNavigate(true)}>作成</button> */}
