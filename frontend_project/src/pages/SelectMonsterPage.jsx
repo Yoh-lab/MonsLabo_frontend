@@ -67,15 +67,14 @@ const SelectMonsterPage = () => {
   return (
     <div>
       <SettingButton />
+      <h2 className="text-center w-screen h-screen">
       <div className="flex flex-col items-center w-screen h-screen justify-center"
         style={{ backgroundImage: `url(${green_img})`, backgroundSize: "cover" , backgroundPosition: "center"}}>
-        <h2 className="text-center">
-          <div className="flex flex-col items-center justify-center w-screen h-screen px-28 pb-16">
-            <h1 className="text-4xl mb-8 pt-16 pb-20 text-white">モンスターを選んでください</h1>
-            <div className="border-2 border-gray-500 overflow-auto">
-              <div className="flex flex-row justify-center py-20 pb-5 flex-wrap gap-5 pt-3">
+            <h2 className="text-4xl mb-8 pt-8 pb-8 text-white">モンスターを選んでください</h2>
+            <div className="border-2 border-gray-500 overflow-auto w-5/6 h-2/3">
+              <div className="flex flex-row justify-center pt-5 pb-5 flex-wrap gap-5">
               {Object.keys(getData).map((key) => (
-                <div key={key} className="flex w-1/6 bg-white flex-col items-center justify-center gap-4">
+                <div key={key} className="flex w-1/6 bg-white flex-col items-center justify-center">
                   <div className="flex-grow">
                     <img
                       src={getData[key].image_url}
@@ -117,9 +116,8 @@ const SelectMonsterPage = () => {
                 /> */}
               </div>
             )}
-          </div>
-        </h2>
       </div>
+      </h2>
     </div>
   );
 };
