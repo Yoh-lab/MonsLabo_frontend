@@ -166,7 +166,7 @@ const TalkPage = () => {
             育成中（{num_response}/5回）
           </h2>
         ) : (
-          <h2 className="absolute top-0 left-0 bg-black text-white border-2 border-gray-300 py-1 px-2 rounded">
+          <h2 className="absolute top-0 left-0 bg-black text-white border-2 border-gray-300 rounded">
             育成完了
           </h2>
         )}
