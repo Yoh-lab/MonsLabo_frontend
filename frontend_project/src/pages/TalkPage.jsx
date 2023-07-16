@@ -134,7 +134,7 @@ const TalkPage = () => {
       <SettingButton />
       <div
         className="flex flex-col items-center w-screen h-screen justify-center"
-        style={{ backgroundImage: `url(${talk_img})`, backgroundSize: "cover" }}
+        style={{ backgroundImage: `url(${talk_img})`, backgroundSize: "cover" , backgroundPosition: "center" }}
       >
         <div className="border-2 bg-white w-1/3 h-2/5 flex justify-center items-center">
           {image_url ? (

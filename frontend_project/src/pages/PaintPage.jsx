@@ -119,7 +119,8 @@ const PaintPage = () => {
         className="flex flex-col items-center justify-center w-screen h-screen"
         style={{
           backgroundImage: `url(${plant_img})`,
-          backgroundSize: "cover",
+          backgroundSize: "cover", 
+          backgroundPosition: "center"
         }}
       >
         <div>

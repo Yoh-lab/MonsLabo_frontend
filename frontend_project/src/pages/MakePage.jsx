@@ -136,7 +136,7 @@ const MakePage = () => {
       <SettingButton />
         <div
         className="flex flex-col items-center w-screen h-screen justify-end"
-        style={{ backgroundImage: `url(${plant_img})`, backgroundSize: "cover" }}
+        style={{ backgroundImage: `url(${plant_img})`, backgroundSize: "cover" , backgroundPosition: "center"}}
       >
         <h2 className="text-center">
           <div className="flex items-center justify-center h-screen w-screen">
