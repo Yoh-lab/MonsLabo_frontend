@@ -22,6 +22,7 @@ const SelectMakePage = () => {
         style={{
           backgroundImage: `url(${plant_img})`,
           backgroundSize: "cover",
+          backgroundPosition: "center"
         }}
       >
         <div className="text-white flex flex-col w-3/5 justify-center items-center gap-5">
