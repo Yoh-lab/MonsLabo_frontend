@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { storage } from "../firebase/firebase";
@@ -292,7 +291,7 @@ const GeneratePage = () => {
                     <div className="mb-4 flex">
                       <label
                         htmlFor="age"
-                        className="block text-white font-bold py-4 py-1 pr-5 pl-5 text-lg"
+                        className="block text-white font-bold py-4  pr-5 pl-5 text-lg"
                       >
                         年齢
                       </label>
