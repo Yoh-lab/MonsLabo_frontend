@@ -73,10 +73,17 @@ button:focus-visible {
 }
 
 @font-face {
-  font-family: Space Invaders, DotGothic16, Arial;
-  src: url(./fonts/space_invaders.ttf), url(./fonts/DotGothic16-Regular.ttf);
+  font-family: 'Space Invaders', 'DotGothic16', 'Arial';
+  src: url(./fonts/space_invaders.eot),
+  url(./fonts/space_invaders.woff) format('woff'),
+  url(./fonts/space_invaders.ttf) format('truetype'),
+  url(./fonts/space_invaders.svg) format('svg'),
+  url(./fonts/DotGothic16-Regular.eot),
+  url(./fonts/DotGothic16-Regular.woff) format('woff'),
+  url(./fonts/DotGothic16-Regular.ttf) format('truetype'),
+  url(./fonts/DotGothic16-Regular.svg) format('svg');
 }
 
 h2{
-  font-family: Space Invaders, DotGothic16, Arial;
+  font-family: 'Space Invaders', 'DotGothic16', 'Arial';
 }
