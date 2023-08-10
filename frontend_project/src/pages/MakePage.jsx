@@ -132,7 +132,7 @@ const MakePage = () => {
 
   return (
 
-    <div className="flash_back">
+    <div>
       <SettingButton />
         <div
         className="flex flex-col items-center w-screen h-screen justify-end"

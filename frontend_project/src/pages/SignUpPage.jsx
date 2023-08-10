@@ -5,7 +5,7 @@ import Image from "../assets/MONS LAB.png";
 const SignUpPage = () => {
   return (
     <div
-      className="flash_back flex flex-col items-center justify-center w-screen"
+      className="flex flex-col items-center justify-center w-screen"
       style={{
         backgroundImage: `url(${BackIcon})`,
         backgroundPosition: "center",

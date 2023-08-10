@@ -119,112 +119,115 @@ const PaintPage = () => {
         className="flex flex-col items-center justify-center w-screen h-screen"
         style={{
           backgroundImage: `url(${plant_img})`,
-          backgroundSize: "cover", 
+          backgroundSize: "cover",
           backgroundPosition: "center"
         }}
       >
-        <div>
-          {shouldNavigate && <Navigate to="/make" replace />}
-          <div className="text-white justify-center items-center">
-            <h2 className="text-4xl mb-10 ">
-              会話するモンスターを描いてください
-            </h2>
-          </div>
-          <div className="gap-32 flex justify-center">
-            <div className=" border-2 bg-white">
-              <canvas
-                ref={canvasRef}
-                onMouseDown={startDrawing}
-                onMouseMove={draw}
-                onMouseUp={stopDrawing}
-                onMouseLeave={stopDrawing}
-              />
-            </div>
-
-            <div className="flex flex-col justify-center items-center">
-              <h2 className="border-2 border-yellow-400  bg-slate-200 dark:bg-gray-500 w-80 mb-12 flex justify-center gap-8">
-                <div className="flex items-center">
-                  <label htmlFor="color" className="mr-2">ペンの色: </label>
-                  <input
-                    type="color"
-                    id="color"
-                    value={penColor}
-                    onChange={handleColorChange}
-                  />
-                </div>
-
-                <div className=" flex items-center">
-                  <label htmlFor="size" className="mr-2">ペンの太さ: </label>
-                  <input
-                  className="bg-white text-right text-black"
-                    type="number"
-                    id="size"
-                    min="1"
-                    max="10"
-                    value={penSize}
-                    onChange={handleSizeChange}
-                  />
-                </div>
+        {shouldNavigate && <Navigate to="/make" replace />}
+        <div className="w-screen h-screen flex justify-center items-center flex-col">
+          <div className="back_sheet z-10 relative"></div>
+          <div className="flex-col z-20 absolute top-50% left-50%">
+            <div className="text-white">
+              <h2 className="text-4xl mb-10 ">
+                会話するモンスターを描いてください
               </h2>
-              <div className="flex flex-col items-center">
-                <div className="w-44 flex justify-center  ">
-                  <button
-                    className="flex items-center w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
-                    onClick={eraseDrawing}
-                  >
-                    <img
-                      src={Eraser}
-                      alt="Click to Sign Out"
-                      className="w-1/5 mr-2"
-                    />
-                    <h2 className="text-2xl w-36 m-0">消しゴム</h2>
-                  </button>
-                  <button
-                    className="flex items-center w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
-                    onClick={clearCanvas}
-                  >
-                    <img
-                      src={Pencil}
-                      alt="Click to Sign Out"
-                      className="w-1/5 mr-2"
-                    />
-                    <h2 className="text-2xl w-36 m-0">クリア</h2>
-                  </button>
-                </div>
-                <div className="w-32 flex justify-center">
-                  <button
-                    className="flex items-center w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
-                    onClick={undoDrawing}
-                  >
-                    <img
-                      src={ArrowBack}
-                      alt="Click to Sign Out"
-                      className="w-1/5 mr-2"
-                    />
-                    <h2 className="text-2xl w-36 m-0">1つ戻る</h2>
-                  </button>
-                  <button
-                    className="flex items-center w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
-                    onClick={redoDrawing}
-                  >
-                    <img
-                      src={ArrowGo}
-                      alt="Click to Sign Out"
-                      className="w-1/5 mr-2"
-                    />
-                    <h2 className="text-2xl w-36 m-0">1つ進める</h2>
-                  </button>
-                </div>
-
-                {/* <button onClick={() => setShouldNavigate(true)}>作成</button> */}
+            </div>
+            <div className="gap-32 flex justify-center">
+              <div className=" border-2 bg-white">
+                <canvas
+                  ref={canvasRef}
+                  onMouseDown={startDrawing}
+                  onMouseMove={draw}
+                  onMouseUp={stopDrawing}
+                  onMouseLeave={stopDrawing}
+                />
               </div>
-              <div>
-                <button
-                  className="mt-24 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
-                  onClick={saveImage}
-                >
-                  <h2 className="text-3xl w-64 m-0">保存 ＆ キャラ作成</h2>
-                </button>
+
+              <div className="flex flex-col justify-center items-center">
+                <h2 className="border-2 border-yellow-400  bg-slate-200 dark:bg-gray-500 w-80 mb-12 flex justify-center gap-8">
+                  <div className="flex items-center">
+                    <label htmlFor="color" className="mr-2">ペンの色: </label>
+                    <input
+                      type="color"
+                      id="color"
+                      value={penColor}
+                      onChange={handleColorChange}
+                    />
+                  </div>
+
+                  <div className=" flex items-center">
+                    <label htmlFor="size" className="mr-2">ペンの太さ: </label>
+                    <input
+                    className="bg-white text-right text-black"
+                      type="number"
+                      id="size"
+                      min="1"
+                      max="10"
+                      value={penSize}
+                      onChange={handleSizeChange}
+                    />
+                  </div>
+                </h2>
+                <div className="flex flex-col items-center">
+                  <div className="w-44 flex justify-center  ">
+                    <button
+                      className="flex items-center w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                      onClick={eraseDrawing}
+                    >
+                      <img
+                        src={Eraser}
+                        alt="Click to Sign Out"
+                        className="w-1/5 mr-2"
+                      />
+                      <h2 className="text-2xl w-36 m-0">消しゴム</h2>
+                    </button>
+                    <button
+                      className="flex items-center w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                      onClick={clearCanvas}
+                    >
+                      <img
+                        src={Pencil}
+                        alt="Click to Sign Out"
+                        className="w-1/5 mr-2"
+                      />
+                      <h2 className="text-2xl w-36 m-0">クリア</h2>
+                    </button>
+                  </div>
+                  <div className="w-32 flex justify-center">
+                    <button
+                      className="flex items-center w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                      onClick={undoDrawing}
+                    >
+                      <img
+                        src={ArrowBack}
+                        alt="Click to Sign Out"
+                        className="w-1/5 mr-2"
+                      />
+                      <h2 className="text-2xl w-36 m-0">1つ戻る</h2>
+                    </button>
+                    <button
+                      className="flex items-center w-5/5 m-6 border-2 border-yellow-400 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                      onClick={redoDrawing}
+                    >
+                      <img
+                        src={ArrowGo}
+                        alt="Click to Sign Out"
+                        className="w-1/5 mr-2"
+                      />
+                      <h2 className="text-2xl w-36 m-0">1つ進める</h2>
+                    </button>
+                  </div>
+
+                  {/* <button onClick={() => setShouldNavigate(true)}>作成</button> */}
+                </div>
+                <div>
+                  <button
+                    className="mt-24 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                    onClick={saveImage}
+                  >
+                    <h2 className="text-3xl w-64 m-0">保存 ＆ キャラ作成</h2>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

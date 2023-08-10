@@ -8,6 +8,48 @@
   transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* 背景色とトランスフォームのトランジションを追加 */
 }
 
+.flash_back {
+  opacity: 0;
+  animation-name: randomLight;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(1, start);
+}
+
+.back_sheet {
+  border-radius: 10px;
+  width: 95%;
+  aspect-ratio: 1766/927;
+  opacity: 0.65;
+  background-color: black;
+  border: 5px dashed white;
+}
+
+
+/*.dashed {
+  background-image :
+    linear-gradient(to right, #000, #000 3px, transparent 3px, transparent 8px),  
+    linear-gradient(to bottom, #000, #000 3px, transparent 3px, transparent 8px), 
+    linear-gradient(to left, #000, #000 3px, transparent 3px, transparent 8px),  
+    linear-gradient(to top, #000, #000 3px, transparent 3px, transparent 8px);  
+  background-size:
+    8px 2px,  
+    2px 8px, 
+    8px 2px, 
+    2px 8px;  
+  background-position:
+    left top, 
+    right top, 
+    right bottom,  
+    left bottom;   
+  background-repeat:
+    repeat-x, 
+    repeat-y, 
+    repeat-x, 
+    repeat-y;   
+}*/
+
 @keyframes fadeInAnime {
   from {
     opacity: 0;
@@ -49,15 +91,6 @@
     filter: blur(0); /* ブラーフィルターを無効にする */
     opacity: 1;
   }
-}
-
-.flash_back {
-  opacity: 0;
-  animation-name: randomLight;
-  animation-duration: 5s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-timing-function: steps(1, start);
 }
 
 @keyframes randomLight {
