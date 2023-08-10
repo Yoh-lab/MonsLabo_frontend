@@ -132,13 +132,14 @@ const MakePage = () => {
 
   return (
 
-    <div>
+    <div className="flash_back">
       <SettingButton />
         <div
         className="flex flex-col items-center w-screen h-screen justify-end"
         style={{ backgroundImage: `url(${plant_img})`, backgroundSize: "cover" , backgroundPosition: "center"}}
       >
-        <h2 className="text-center">
+        <div className="back_sheet z-10 relative"></div>
+        <h2 className="flex flex-col items-center justify-center z-20 absolute top-50% left-50% ">
           <div className="flex items-center justify-center h-screen w-screen">
             <form onSubmit={handleModalOpen}>
               <h2 className="text-center text-6xl text-white mb-4 pb-2">
@@ -231,7 +232,7 @@ const MakePage = () => {
                         value={gender}
                         onChange={handleGenderChange}
                         className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="例）性別"
+                        placeholder="例）男性"
                         required
                       />
                     </div>
