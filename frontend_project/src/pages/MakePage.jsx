@@ -10,6 +10,7 @@ import HandleSendData from "../components/sendNewMonster";
 import GetMonsterCount from "../components/GetMonsterCount";
 import SettingButton from "../components/SettingButton";
 import plant_img from "../assets/plant.png";
+import axios from "axios";
 
 const MakePage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -18,10 +19,12 @@ const MakePage = () => {
   const [gender, setGender] = useState("");
   const [race, setRace] = useState("");
   const [hobby, setHobby] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showGenerateModal, setShowGenerateModal] = useState(false);
   const navigate = useNavigate();
   const [sendfile, setsendFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedButton, setSelectedButton] = useState("");
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
@@ -55,13 +58,30 @@ const MakePage = () => {
     setHobby(event.target.value);
   };
 
-  const handleModalOpen = (event) => {
-    event.preventDefault();
-    setShowModal(true);
+  const handleSubmitButtonAction = (event) => {
+    if (selectedButton === "register") {
+      handleRegisterModalOpen(event);
+    } else if (selectedButton === "generate") {
+      handleGenerateModalOpen(event);
+    }
   };
 
-  const handleModalClose = () => {
-    setShowModal(false);
+  const handleRegisterModalOpen = (event) => {
+    event.preventDefault();
+    setShowRegisterModal(true);
+  };
+
+  const handleRegisterModalClose = () => {
+    setShowRegisterModal(false);
+  };
+
+  const handleGenerateModalOpen = (event) => {
+    event.preventDefault();
+    setShowGenerateModal(true);
+  };
+
+  const handleGenerateModalClose = () => {
+    setShowGenerateModal(false);
   };
 
   const handleRegister = async (event) => {
@@ -122,27 +142,54 @@ const MakePage = () => {
         }
       });
     } catch (error) {
-      console
-        .log("画像のアップロード時にエラーが発生しました。", error)
-        setIsLoading(false);
+      console.log("画像のアップロード時にエラーが発生しました。", error);
+      setIsLoading(false);
     }
-
   };
 
+  const handleGenerateImage = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    try {
+      console.log(selectedFile);
+      const response = await axios.post(
+        "https://monslabobackend-production.up.railway.ap~~~~",
+        {
+          image: selectedFile,
+          name: String(name),
+          age: Number(age),
+          sex: String(gender),
+          hobby: String(hobby),
+          race: String(race),
+        }
+      );
+      const NewData = {
+        num_response: Number(Number(num_response) + 1),
+      };
+      setResponseImage(response.data);
+    } catch (error) {
+      console.error(error);
+      setResponseData("Error: Failed to fetch data from API");
+    }
+    setIsLoading(false);
+  };
 
   return (
-
     <div>
       <SettingButton />
-        <div
+      <div
         className="flex flex-col items-center w-screen h-screen justify-end"
-        style={{ backgroundImage: `url(${plant_img})`, backgroundSize: "cover" , backgroundPosition: "center"}}
+        style={{
+          backgroundImage: `url(${plant_img})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
         <h2 className="text-center">
           <div className="flex items-center justify-center h-screen w-screen">
-            <form onSubmit={handleModalOpen}>
+            <form onSubmit={handleSubmitButtonAction}>
               <h2 className="text-center text-6xl text-white mb-4 pb-2">
-              モンスター登録
+                モンスター登録
               </h2>
               <h2 className="text-center text-2xl text-white mb-4 pb-12">
                 詳細情報を設定してください。
@@ -151,7 +198,10 @@ const MakePage = () => {
                 <div className="">
                   <div className="flex justify-center">
                     <div className="mb-4 bg-slate-400">
-                      <label htmlFor="file" className="block text-white bg-black border-2 border-gray-200">
+                      <label
+                        htmlFor="file"
+                        className="block text-white bg-black border-2 border-gray-200"
+                      >
                         Select Image (PNG only):
                       </label>
                       <input
@@ -176,15 +226,20 @@ const MakePage = () => {
                     ) : (
                       <div className="">
                         <div className="w-full h-40 border-dashed border-2 border-gray-400 flex items-center justify-center">
-                          <span className="text-gray-400">No image selected</span>
+                          <span className="text-gray-400">
+                            No image selected
+                          </span>
                         </div>
                       </div>
                     )}
-                  </div> 
+                  </div>
                 </div>
                 <div className="">
                   <div className="mb-4 flex">
-                    <label htmlFor="name" className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg">
+                    <label
+                      htmlFor="name"
+                      className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg"
+                    >
                       名前
                     </label>
                     <div className="relative">
@@ -202,7 +257,10 @@ const MakePage = () => {
                     </div>
                   </div>
                   <div className="mb-4 flex">
-                    <label htmlFor="age" className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg">
+                    <label
+                      htmlFor="age"
+                      className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg"
+                    >
                       年齢
                     </label>
                     <div className="relative">
@@ -220,7 +278,10 @@ const MakePage = () => {
                     </div>
                   </div>
                   <div className="mb-4 flex">
-                    <label htmlFor="gender" className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg">
+                    <label
+                      htmlFor="gender"
+                      className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg"
+                    >
                       性別
                     </label>
                     <div className="relative">
@@ -237,7 +298,10 @@ const MakePage = () => {
                     </div>
                   </div>
                   <div className="mb-4 flex">
-                    <label htmlFor="race" className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg">
+                    <label
+                      htmlFor="race"
+                      className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg"
+                    >
                       種族
                     </label>
                     <div className="relative">
@@ -254,7 +318,10 @@ const MakePage = () => {
                     </div>
                   </div>
                   <div className="mb-4 flex">
-                    <label htmlFor="hobby" className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg">
+                    <label
+                      htmlFor="hobby"
+                      className="block text-white font-bold pl-4 py-1 pr-5 pl-5 text-lg"
+                    >
                       趣味
                     </label>
                     <div className="relative">
@@ -272,23 +339,31 @@ const MakePage = () => {
                   </div>
                 </div>
               </div>
-              <div className="pt-20">
+              <div className="pt-20 flex justify-center space-x-4">
                 <button
                   type="submit"
+                  onClick={() => setSelectedButton("register")}
                   className="w-1/2 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
                 >
-                  登録
+                  そのまま登録
+                </button>
+                <button
+                  type="submit"
+                  onClick={() => setSelectedButton("generate")}
+                  className="w-1/2 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                >
+                  AIで画像生成
                 </button>
               </div>
             </form>
-            {showModal && (
+            {showRegisterModal && (
               <div className="bg-white bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
                 <div className="bg-black text-white p-4 rounded border-2 border-yellow-400">
                   <h3 className="text-xl mb-2">Confirmation Dialog</h3>
                   <p>このキャラクターを登録しますか？</p>
                   <div className="mt-4 flex justify-end">
                     <button
-                      onClick={handleModalClose}
+                      onClick={handleRegisterModalClose}
                       className="mr-2 bg-black text-white px-4 py-2 rounded"
                     >
                       Cancel
@@ -304,8 +379,63 @@ const MakePage = () => {
                 </div>
                 {/* <div
                   className=" absolute top-0 left-0 w-full h-screen"
-                  onClick={handleModalClose}
+                  onClick={handleRegisterModalClose}
                 /> */}
+              </div>
+            )}
+            {showGenerateModal && (
+              <div className="bg-white bg-opacity-50 fixed w-screen h-screen flex justify-center items-center">
+                <div className="bg-black w-3/4 h-3/4  text-white p-4 rounded border-2 border-yellow-400">
+                  {selectedFile ? ( //ここはAPIからの返答を受け取って画像を表示する。
+                    <div className="h-full flex-col">
+                      <div className="h-1/4">
+                        <h3 className="text-3xl m-2">Confirmation Dialog</h3>
+                        <p className="text-4xl p-6">この画像で登録しますか？</p>
+                      </div>
+                      <div className="h-2/4">
+                        <img src={selectedFile} alt="Selected" className="max-w-" />
+                      </div>
+                      <div className=" h-1/4">
+                        <button
+                          onClick={null} //ここで画像生成ようのAPIを叩く
+                          className="mt-4 bg-black text-white px-4 py-2 rounded"
+                        >
+                          もう一度生成する
+                        </button>
+                        <div className="mt-4 flex justify-around">
+                          <button
+                            onClick={handleGenerateModalClose}
+                            className="mr-2 bg-black text-white px-4 py-2 rounded"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            onClick={null} //ここで画像生成ようのAPIを叩く
+                            className="bg-black text-white px-4 py-2 rounded"
+                          >
+                            OK!
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="h-full  flex-col">
+                      <div className="bg-green-500 h-4/5 flex items-center justify-center">
+                        <div className="">
+                          <CircularProgress />
+                        </div>
+                      </div>
+                      <div className="bg-blue-500 h-1/5">
+                        <button
+                          onClick={handleGenerateModalClose}
+                          className="bg-black text-white px-4 py-2 rounded"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </div>
