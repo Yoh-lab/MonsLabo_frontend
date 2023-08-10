@@ -15,7 +15,7 @@ const SelectMakePage = () => {
   };
 
   return (
-    <div>
+    <div className="flash_back">
       <SettingButton />
       <div
         className="flex flex-col items-center justify-center w-screen h-screen"

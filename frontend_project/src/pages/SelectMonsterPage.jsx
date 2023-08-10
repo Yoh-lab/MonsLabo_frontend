@@ -65,7 +65,7 @@ const SelectMonsterPage = () => {
     );
   }
   return (
-    <div>
+    <div className="flash_back">
       <SettingButton />
       <h2 className="text-center w-screen h-screen">
       <div className="flex flex-col items-center w-screen h-screen justify-center"

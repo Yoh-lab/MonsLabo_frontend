@@ -51,6 +51,30 @@
   }
 }
 
+.flash_back {
+  opacity: 0;
+  animation-name: randomLight;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(1, start);
+}
+
+@keyframes randomLight {
+  0%, 100% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0.8;
+  } 
+  9%, 11%, 20%, 22%, 24%, 59%, 61%, 80%{
+    opacity: 1;
+  }
+  21%, 23%, 60% {
+    opacity: 0.8;
+  }
+}
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;

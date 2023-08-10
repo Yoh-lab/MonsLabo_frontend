@@ -130,7 +130,7 @@ const TalkPage = () => {
 
 
   return (
-    <div>
+    <div className="flash_back">
       <SettingButton />
       <div
         className="flex flex-col items-center w-screen h-screen justify-center"
