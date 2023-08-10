@@ -28,17 +28,17 @@ const GeneratePage = () => {
   const [isGenerateButtonClicked, setIsGenerateButtonClicked] = useState(false);
   const [responseData, setResponseData] = useState("");
 
-  //   const handleFileSelect = (event) => {
-  //     const file = event.target.files[0];
-  //     if (file && file.type === "image/png") {
-  //       const reader = new FileReader();
-  //       reader.onload = (e) => {
-  //         setSelectedFile(e.target.result);
-  //       };
-  //       reader.readAsDataURL(file);
-  //     }
-  //     setsendFile(file);
-  //   };
+//   const handleFileSelect = (event) => {
+//     const file = event.target.files[0];
+//     if (file && file.type === "image/png") {
+//       const reader = new FileReader();
+//       reader.onload = (e) => {
+//         setSelectedFile(e.target.result);
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//     setsendFile(file);
+//   };
 
   const handlePromptChange = (event) => {
     setPrompt(event.target.value);
@@ -142,21 +142,39 @@ const GeneratePage = () => {
     setIsGenerateButtonClicked(true);
     try {
       console.log({ prompt });
-      const response = await axios.post(
+      const response = await fetch(
         "https://monslabobackend-production.up.railway.app/image",
         {
-          description: String(prompt),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            description: String(prompt),
+          }),
         }
       );
-      console.log("test");
-      console.log(response.data);
-      console.log("test2");
-      setSelectedFile(response.data);
-      console.log("test3");
-      setsendFile(response.data);
+      const blob = await response.blob();
+      const localUrl = URL.createObjectURL(blob);
+      setSelectedFile(localUrl);
+    //   console.log("localUrl");
+      const imageResponse = await fetch(localUrl);
+      if (!imageResponse.ok) {
+        console.error("Error fetching image");
+        return;
+      }
+      const imageBlob = await imageResponse.blob();
+      const file = new File([imageBlob], "image.png", {
+        type: "image/png",
+      });
+      setsendFile(file);
+
+      //   handleFileSelect(localUrl);
+      //   setsendFile(localUrl);
       //   handleFileSelect(response.data)
-      console.log("test4");
+      console.log("test6");
       console.log(selectedFile);
+      console.log(sendfile);
     } catch (error) {
       console.error(error);
       setResponseData("Error: Failed to fetch data from API");
@@ -198,15 +216,15 @@ const GeneratePage = () => {
                         {/* Put Detail of Monster */}
                         画像のイメージ
                       </label>
-                        <input
-                          type="text"
-                          autoComplete="off"
-                          id="file"
-                          value={prompt}
-                          onChange={handlePromptChange}
-                          className="w-full text-center border-2 border-yellow-300 bg-black text-white  text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          placeholder="例）浴衣を着て王冠を被った星の妖精"
-                        />
+                      <input
+                        type="text"
+                        autoComplete="off"
+                        id="file"
+                        value={prompt}
+                        onChange={handlePromptChange}
+                        className="w-full text-center border-2 border-yellow-300 bg-black text-white  text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="例）浴衣を着て王冠を被った星の妖精"
+                      />
                       {/* <input
                         type="file"
                         id="file"
