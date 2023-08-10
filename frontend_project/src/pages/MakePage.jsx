@@ -18,7 +18,8 @@ const MakePage = () => {
   const [gender, setGender] = useState("");
   const [race, setRace] = useState("");
   const [hobby, setHobby] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showGenerateModal, setShowGenerateModal] = useState(false);
   const navigate = useNavigate();
   const [sendfile, setsendFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,13 +56,22 @@ const MakePage = () => {
     setHobby(event.target.value);
   };
 
-  const handleModalOpen = (event) => {
+  const handleRegisterModalOpen = (event) => {
     event.preventDefault();
-    setShowModal(true);
+    setShowRegisterModal(true);
   };
 
-  const handleModalClose = () => {
-    setShowModal(false);
+  const handleRegisterModalClose = () => {
+    setShowRegisterModal(false);
+  };
+
+  const handleGenerateModalOpen = (event) => {
+    event.preventDefault();
+    setShowGenerateModal(true);
+  };
+
+  const handleGenerateModalClose = () => {
+    setShowGenerateModal(false);
   };
 
   const handleRegister = async (event) => {
@@ -140,7 +150,7 @@ const MakePage = () => {
       >
         <h2 className="text-center">
           <div className="flex items-center justify-center h-screen w-screen">
-            <form onSubmit={handleModalOpen}>
+            <form onSubmit={handleRegisterModalOpen}>
               <h2 className="text-center text-6xl text-white mb-4 pb-2">
               モンスター登録
               </h2>
@@ -272,23 +282,29 @@ const MakePage = () => {
                   </div>
                 </div>
               </div>
-              <div className="pt-20">
+              <div className="pt-20 flex justify-center space-x-4">
                 <button
                   type="submit"
                   className="w-1/2 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
                 >
-                  登録
+                  そのまま登録
+                </button>
+                <button
+                  onClick={handleGenerateModalOpen}
+                  className="w-1/2 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                >
+                  AIで画像生成
                 </button>
               </div>
             </form>
-            {showModal && (
+            {showRegisterModal && (
               <div className="bg-white bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
                 <div className="bg-black text-white p-4 rounded border-2 border-yellow-400">
                   <h3 className="text-xl mb-2">Confirmation Dialog</h3>
                   <p>このキャラクターを登録しますか？</p>
                   <div className="mt-4 flex justify-end">
                     <button
-                      onClick={handleModalClose}
+                      onClick={handleRegisterModalClose}
                       className="mr-2 bg-black text-white px-4 py-2 rounded"
                     >
                       Cancel
@@ -304,8 +320,12 @@ const MakePage = () => {
                 </div>
                 {/* <div
                   className=" absolute top-0 left-0 w-full h-screen"
-                  onClick={handleModalClose}
+                  onClick={handleRegisterModalClose}
                 /> */}
+              </div>
+            )}
+            {showGenerateModal && (
+              <div>
               </div>
             )}
           </div>
