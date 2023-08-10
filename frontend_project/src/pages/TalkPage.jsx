@@ -171,7 +171,7 @@ const TalkPage = () => {
                 className="w-3/5 h-40 px-4 py-2 dark:text-black border border-gray-300 rounded-lg bg-gradient-to-t from-gray-400 to-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={
                   responseData ||
-                  "５回会話を行なって，モンスターの育成を行なってください．語尾を学習します(例： ござる)"
+                  "５回会話を行なって，モンスターの育成を行なってください．\nあなたの発言から語尾や口調を学習します。 （＜例＞語尾：なのだ、口調：関西弁）"
                 }
                 readOnly // 入力禁止にする
               ></textarea>
@@ -202,7 +202,7 @@ const TalkPage = () => {
               >
                 <textarea
                   className="flex-grow dark:text-black bg-white h-10 px-4 py-2 border-2 border-gray-300 mr-2 pl-8"
-                  placeholder="例）こんにちは"
+                  placeholder="例）おはようなのだ！今日めっちゃ暑くてしゃーないわ！なのだ！"
                   value={formInput}
                   onChange={handleInputChange}
                 ></textarea>

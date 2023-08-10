@@ -137,6 +137,7 @@ const GeneratePage = () => {
 
   const handleGenerateImage = async (event) => {
     event.preventDefault();
+    if(prompt !== ""){
     setIsGenerating(true);
     setIsGenerateButtonClicked(true);
     try {
@@ -181,6 +182,10 @@ const GeneratePage = () => {
     }
     console.log("test5");
     setIsGenerating(false);
+}else{
+    console.log("入力が空です。");
+}
+
   };
 
   return (
@@ -384,7 +389,7 @@ const GeneratePage = () => {
                 <div className="bg-white bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
                   <div className="bg-black text-white p-4 rounded border-2 border-yellow-400">
                     <h3 className="text-xl mb-2">Confirmation Dialog</h3>
-                    <p>このキャラクターを登録しますか？</p>
+                    <p>このモンスターを登録しますか？</p>
                     <div className="mt-4 flex justify-end">
                       <button
                         onClick={handleModalClose}
