@@ -16,6 +16,7 @@ import SelectMonsterPage from "./pages/SelectMonsterPage";
 import TestPage from "./pages/TestPage";
 import SelectMakePage from "./pages/SelectMakePage";
 import ScrollTop from "./components/ScrollTop";
+import GeneratePage from "./pages/GeneratePage";
 // import TestPage from "./pages/TestPage";
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
                 <Route path={`/selectMonster`} element={<SelectMonsterPage />} />
                 <Route path={`/selectMake`} element={<SelectMakePage />} />
                 <Route path={`/paint`} element={<PaintPage />} />
+                <Route path={`/generate`} element={<GeneratePage />} />
                 <Route path={`/make`} element={<MakePage />} />
                 <Route path={`/talk`} element={<TalkPage/>} />
                 <Route path={`/test`} element={<TestPage/>} />

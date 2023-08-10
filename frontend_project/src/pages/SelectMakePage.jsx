@@ -8,10 +8,13 @@ const SelectMakePage = () => {
     // モンスターを作成ボタンがクリックされた時の処理
     navigate("/paint");
   };
-
   const handleToCheckPage = () => {
     // モンスターと会話ボタンがクリックされた時の処理
     navigate("/make");
+  };
+  const handleToGeneratePage = () => {
+    // モンスターと会話ボタンがクリックされた時の処理
+    navigate("/generate");
   };
 
   return (
@@ -34,6 +37,12 @@ const SelectMakePage = () => {
             onClick={handletoPaintPage}
           >
             <h2 className="text-4xl m-2">自分でイラストを描く</h2>
+          </button>
+          <button
+            className="w-2/5 m-6 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+            onClick={handleToGeneratePage}
+          >
+            <h2 className="text-4xl m-2">AI生成画像を使う</h2>
           </button>
           <button
             className="w-2/5 m-6 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
