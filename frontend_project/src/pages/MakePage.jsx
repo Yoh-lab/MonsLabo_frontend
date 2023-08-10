@@ -32,6 +32,7 @@ const MakePage = () => {
       };
       reader.readAsDataURL(file);
     }
+    console.log(selectedFile);
     setsendFile(file);
   };
 
