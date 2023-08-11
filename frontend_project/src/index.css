@@ -59,9 +59,6 @@ button:hover {
   animation-iteration-count: 1;
   animation-timing-function: steps(1, start);
 }
-button:active {
-  animation: explode 0.8s ease forwards;
-}
 button:focus,
 button:focus-visible {
   outline: 4px solid #e947f1;
@@ -78,6 +75,14 @@ button:focus-visible {
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
   animation-timing-function: steps(1, start);
+}
+
+.button1 {
+  opacity: 1;
+}
+
+.button1:active {
+  animation: explode 0.8s ease forwards;
 }
 
 @keyframes lights {

@@ -136,7 +136,7 @@ const MakePage = () => {
     <div className="flash_back">
       <SettingButton />
         <div
-        className="flex flex-col items-center w-screen h-screen justify-end"
+        className="flex flex-col justify-center items-center w-screen h-screen justify-end"
         style={{ backgroundImage: `url(${plant_img})`, backgroundSize: "cover" , backgroundPosition: "center"}}
       >
         <div className="back_sheet z-10 relative"></div>

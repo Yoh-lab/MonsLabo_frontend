@@ -192,7 +192,7 @@ const GeneratePage = () => {
     <div className="flash_back">
       <SettingButton />
       <div
-        className="flex flex-col items-center w-screen h-screen justify-end"
+        className="flex flex-col justify-center items-center w-screen h-screen"
         style={{
           backgroundImage: `url(${plant_img})`,
           backgroundSize: "cover",
@@ -200,19 +200,19 @@ const GeneratePage = () => {
         }}
       >
         <div className="back_sheet z-10 relative"></div>
-        <div className="text-white flex flex-col items-center justify-center w-full gap-5 z-20 absolute top-50% left-50%">
-          <h2 className="text-center">
-            <div className="flex items-center justify-center h-screen w-screen">
-              <form className=" w-7/12" onSubmit={handleModalOpen}>
+        <div className="text-white flex flex-col items-center justify-center w-full mt-10 mb-10 z-20 absolute top-50% left-50%">
+          <h2 className="text-center w-full h-full">
+            <div className="flame1 flex items-center justify-center">
+              <form className=" w-full" onSubmit={handleModalOpen}>
                 <h2 className="text-center text-6xl text-white mb-4 pb-2">
                   モンスター登録
                 </h2>
-                <h2 className="text-center text-2xl text-white mb-4 pb-12">
+                <h2 className="text-center text-2xl text-white pb-5">
                   詳細情報を設定してください。
                 </h2>
-                <div className="flex justify-center  items-center gap-16">
-                  <div className="  w-1/2">
-                    <div className="flex-col justify-center w-full">
+                <div className="flame1 mb-0 mt-0 flex justify-center items-center">
+                  <div className="w-1/2">
+                    <div className="flex flex-col justify-center items-center w-full">
                       <label
                         htmlFor="prompt"
                         className="block text-white bg-black "
@@ -271,7 +271,7 @@ const GeneratePage = () => {
                   </div>
 
                   {/* 右側 */}
-                  <div className=" w-1/2">
+                  <div className="w-1/2 flex flex-col justify-center items-center">
                     <div className="mb-4 flex">
                       <label
                         htmlFor="name"
@@ -368,7 +368,7 @@ const GeneratePage = () => {
                           id="hobby"
                           value={hobby}
                           onChange={handleHobbyChange}
-                          className="w-full border-2 border-yellow-300 bg-black text-white pl-4 py-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          className="w-full border-2 border-yellow-300 bg-black text-white pl-4 pt-1 pr-12 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           placeholder="例）筋トレ"
                           required
                         />
@@ -379,7 +379,7 @@ const GeneratePage = () => {
                 <div className="pt-20">
                   <button
                     type="submit"
-                    className="w-1/2 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+                    className="w-1/2 border-2 border-Fuchsia-500 bg-black text-white mb-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
                   >
                     登録
                   </button>

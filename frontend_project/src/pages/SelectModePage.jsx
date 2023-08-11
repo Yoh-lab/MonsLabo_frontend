@@ -52,14 +52,14 @@ const SelectModePage = () => {
           <h2 className="text-7xl mb-2">モード選択</h2>
           <h2 className="text-3xl mb-20">遊び方を選択してください</h2>
           <button
-            className="w-2/5 m-6 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+            className="button1 w-2/5 m-6 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
             onClick={handleCreateMonster}
           >
             <h2 className="text-4xl m-2">モンスターを作成</h2>
           </button>
           {getData > 0 ? (
             <button
-              className="w-2/5 m-6 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+              className="button1 w-2/5 m-6 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
               onClick={handleTalkToMonster}
             >
               <h2 className="text-4xl m-2">作ったモンスターと会話</h2>
