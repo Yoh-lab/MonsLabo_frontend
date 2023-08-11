@@ -26,29 +26,10 @@
   border: 5px dashed white;
 }
 
-
-/*.dashed {
-  background-image :
-    linear-gradient(to right, #000, #000 3px, transparent 3px, transparent 8px),  
-    linear-gradient(to bottom, #000, #000 3px, transparent 3px, transparent 8px), 
-    linear-gradient(to left, #000, #000 3px, transparent 3px, transparent 8px),  
-    linear-gradient(to top, #000, #000 3px, transparent 3px, transparent 8px);  
-  background-size:
-    8px 2px,  
-    2px 8px, 
-    8px 2px, 
-    2px 8px;  
-  background-position:
-    left top, 
-    right top, 
-    right bottom,  
-    left bottom;   
-  background-repeat:
-    repeat-x, 
-    repeat-y, 
-    repeat-x, 
-    repeat-y;   
-}*/
+.flame1 {
+  width: 90%;
+  margin: 5%;
+}
 
 @keyframes fadeInAnime {
   from {
@@ -98,13 +79,13 @@
     opacity: 1;
   }
   10% {
-    opacity: 0.8;
+    opacity: 0.9;
   } 
   9%, 11%, 20%, 22%, 24%, 59%, 61%, 80%{
     opacity: 1;
   }
   21%, 23%, 60% {
-    opacity: 0.8;
+    opacity: 0.9;
   }
 }
 
