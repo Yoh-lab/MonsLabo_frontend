@@ -1,9 +1,23 @@
+import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
-
+import { useState, useEffect } from "react";
+import GetMonsterCount from "../components/GetMonsterCount";
+import SettingButton from "../components/SettingButton";
+import plant_img from "../assets/plant.png";
 
 const SelectModePage = () => {
-  
   const navigate = useNavigate();
+  const [getData, setGetData] = useState(null);
+
+  useEffect(() => {
+    const fetchDataAndSetData = async () => {
+      const data = await GetMonsterCount();
+      setGetData(data);
+      console.log(data);
+    };
+    fetchDataAndSetData();
+  }, []);
+
   const handleCreateMonster = () => {
     // モンスターを作成ボタンがクリックされた時の処理
     navigate("/selectMake");
@@ -14,24 +28,55 @@ const SelectModePage = () => {
     navigate("/selectMonster");
   };
 
-
+  if (getData == null) {
+    return (
+      <div>
+        <div>Loading...</div>
+        <CircularProgress />
+      </div>
+    );
+  }
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-4xl mb-8">モンスターゲーム</h1>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
-        onClick={handleCreateMonster}
+    <div className="flash_back">
+      <SettingButton />
+      <div
+        className="flex flex-col items-center justify-center w-screen h-screen"
+        style={{
+          backgroundImage: `url(${plant_img})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center"
+        }}
       >
-        モンスターを作成
-      </button>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={handleTalkToMonster}
-      >
-        モンスターと会話
-      </button>
+        <div className="back_sheet z-10 relative"></div>
+        <div className="text-white flex flex-col w-full justify-center items-center gap-5 z-20 absolute left-50% top-50%">
+          <h2 className="text-7xl mb-2">モード選択</h2>
+          <h2 className="text-3xl mb-20">遊び方を選択してください</h2>
+          <button
+            className="button1 w-2/5 m-6 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+            onClick={handleCreateMonster}
+          >
+            <h2 className="text-4xl m-2">モンスターを作成</h2>
+          </button>
+          {getData > 0 ? (
+            <button
+              className="button1 w-2/5 m-6 border-2 border-Fuchsia-500 bg-black text-white py-2 hover:bg-gray-700 transition duration-300 focus:border-transparent"
+              onClick={handleTalkToMonster}
+            >
+              <h2 className="text-4xl m-2">作ったモンスターと会話</h2>
+            </button>
+          ) : (
+            // １体もモンスターがいない場合はモンスターと会話ボタンを薄くして、クリックできないようにする
+            <button
+              className="w-2/5 m-6 border-0 border-Fuchsia-500 bg-gray-400 bg-opacity-40 text-gray-400 text-opacity-50 py-2  transition duration-300"
+              onClick={null}
+            >
+              <h2 className="text-4xl m-2">作ったモンスターと会話</h2>
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default SelectModePage
+export default SelectModePage;

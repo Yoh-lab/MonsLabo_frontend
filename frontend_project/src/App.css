@@ -1,3 +1,94 @@
+.App-header {
+  opacity: 0;
+  animation-name: fadeInAnime, randomBlink, motionBlur;
+  animation-duration: 3s, 0.1s, 1s; /* blinkのdurationを0.5秒に変更 */
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1, 7, 1, 1;
+  animation-timing-function: steps(2, start); /* ステップ数とタイミング関数を設定 */
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* 背景色とトランスフォームのトランジションを追加 */
+}
+
+.flash_back {
+  opacity: 0;
+  animation-name: randomLight;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(1, start);
+}
+
+.back_sheet {
+  border-radius: 10px;
+  width: 95%;
+  aspect-ratio: 1766/927;
+  opacity: 0.65;
+  background-color: black;
+  border: 5px dashed white;
+}
+
+.flame1 {
+  width: 90%;
+  margin: 5%;
+}
+
+@keyframes fadeInAnime {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes randomBlink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  } 
+  100% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.5; /* 追加: 25%の時に0.5の不透明度 */
+  }
+  75% {
+    opacity: 0.5; /* 追加: 75%の時に0.5の不透明度 */
+  }
+}
+
+@keyframes motionBlur {
+  0% {
+    filter: blur(0); /* ブラーフィルターを無効にする */
+  }
+  50% {
+    filter: blur(3px); /* ブラーフィルターを5ピクセルに設定 */
+  }
+  95% {
+    opacity: 0.3;
+  }
+  100% {
+    filter: blur(0); /* ブラーフィルターを無効にする */
+    opacity: 1;
+  }
+}
+
+@keyframes randomLight {
+  0%, 100% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0.9;
+  } 
+  9%, 11%, 20%, 22%, 24%, 59%, 61%, 80%{
+    opacity: 1;
+  }
+  21%, 23%, 60% {
+    opacity: 0.9;
+  }
+}
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -39,4 +130,8 @@
 
 .read-the-docs {
   color: #888;
-} */
+} 
+
+.textarea-height {
+  height: 60px;
+}*/

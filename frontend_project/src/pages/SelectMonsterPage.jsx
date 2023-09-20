@@ -1,116 +1,128 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
-import { database } from "../firebase/firebase";
-import { getAuth } from "firebase/auth";
-import { useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import HandleGetData from "../components/GetAllMonsterData";
+import SettingButton from "../components/SettingButton";
+import green_img from "../assets/green.png";
 
 const SelectMonsterPage = () => {
+  const [getData, setGetData] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  // const [isCompleted, setIsCompleted] = useState(false);
-  const [userId, setUserId] = useState("");
-  const [responseMessages, setResponseMessages] = useState("");
-  const [errorMessages, setErrorMessages] = useState("");
 
-  const HandleGetData = async (e) => {
-    e.preventDefault();
-    const auth = getAuth();
-    const user = auth.currentUser;
+  useEffect(() => {
+    const fetchDataAndSetData = async () => {
+      const data = await HandleGetData();
+      setGetData(data);
+      console.log(data);
+    };
+    fetchDataAndSetData();
+  }, []);
 
-    if (user) {
-      console.log(user.uid);
-      setResponseMessages(user.uid);
-      setUserId(user.uid);
+  const navigate = useNavigate();
 
+  const [selectedId, setSelectedId] = useState(null);
+  const handleModalOpen = (id) => {
+    setSelectedId(id);
+    console.log(id);
+    setShowModal(true);
+  };
 
-      try {
-        // Firestoreにデータを格納
-        const docRef = doc(database, user.uid, "Monster1");
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          // setResponseMessages(docSnap.data());
-          // console.log("Document data:", docSnap.data());
-          console.log(docSnap.data());
-          // setErrorMessages(docSnap.data());
-        } else {
-          // docSnap.data() will be undefined in this case
-          setErrorMessages("No such document!");
-        }
-        // navigate("/talk", { state: { selectedFile } });
-      } catch (error) {
-        console.error(
-          "Firestoreからのデータ取得時にエラーが発生しました。",
-          error
-        );
-        setErrorMessages(error.message);
-      }
-    } else {
-      setErrorMessages("サインインしていません。");
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    try {
+      navigate("/talk", {
+        state: {
+          // selectedFile: getData[selectedId].image_url,
+          monsterId: selectedId.toString().padStart(3, "0"),
+          name: getData[selectedId].name,
+          age: String(getData[selectedId].age),
+          gender: getData[selectedId].gender,
+          hobby: getData[selectedId].hobby,
+          race: getData[selectedId].race,
+          _logInput: getData[selectedId]._logInput,
+          _logOutput: getData[selectedId]._logOutput,
+          num_response: String(getData[selectedId].num_response),
+          image_url: getData[selectedId].image_url,
+        },
+      });
+    } catch (error) {
+      console.log("画像のURL取得時にエラーが発生しました。", error);
     }
     setIsLoading(false);
   };
 
-  // const getFirestore = async () => {
-  //   console.log("test Log");
-  //   setIsLoading(true);
-
-  //   try {
-  //     // Firestoreにデータを格納
-  //     const docRef = doc(database, userId);
-  //     const docSnap = await getDoc(docRef);
-  //     console.log("Document data:");
-  //     if (docSnap.exists()) {
-  //       console.log("Document data:");
-  //       console.log(docSnap.data());
-  //       // setErrorMessages(docSnap.data());
-  //     } else {
-  //       // docSnap.data() will be undefined in this case
-  //       setErrorMessages("No such document!");
-  //     }
-  //     // navigate("/talk", { state: { selectedFile } });
-  //   } catch (error) {
-  //     console.error(
-  //       "Firestoreからのデータ取得時にエラーが発生しました。",
-  //       error
-  //     );
-  //     setErrorMessages(error.message);
-  //   }
-  //   setIsLoading(false);
-  // };
-
-
-
-  const navigate = useNavigate();
-  const handleToTalk = () => {
-    // モンスターを作成ボタンがクリックされた時の処理
-    navigate("/talk");
-  };
-
-  const handleToSelectMode = () => {
-    // モンスターと会話ボタンがクリックされた時の処理
-    navigate("/selectMode");
-  };
-
+  if (!getData) {
+    return (
+      <div>
+        <div>Loading...</div>
+        <CircularProgress />
+      </div>
+    );
+  }
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen">
-      <h1 className="text-4xl mb-8">モンスターを選んでください</h1>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
-        onClick={handleToTalk}
-      >
-        このモンスターで遊ぶ
-      </button>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={handleToSelectMode}
-      >
-        戻る
-      </button>
-      <button onClick={HandleGetData}>Firestoreからデータを受け取る</button>
-      <h1>{userId}</h1>
-      <h1>{errorMessages}</h1>
-      <h1>{responseMessages}</h1>
-      {isLoading && <CircularProgress />}
+    <div className="flash_back">
+      <SettingButton />
+      <h2 className="text-center w-screen h-screen">
+        <div className="flex flex-col items-center w-screen h-screen justify-center"
+          style={{ backgroundImage: `url(${green_img})`, backgroundSize: "cover" , backgroundPosition: "center"}}>
+            <div className="back_sheet z-10 relative"></div>
+            <div className="h-5/6 flex flex-col items-center justify-center z-20 absolute top-50% left-50%">
+              <h2 className="text-4xl mb-8 pb-8 text-white">モンスターを選んでください</h2>
+              <div className="border-2 border-gray-500 overflow-auto w-5/6">
+                <div className="flex flex-row justify-center pt-5 pb-5 flex-wrap gap-5">
+                {Object.keys(getData).map((key) => (
+                  <div key={key} className="flex w-1/6 bg-white flex-col items-center justify-center">
+                    <div className="flex flex-grow flex-col items-center justify-center">
+                      <img
+                        src={getData[key].image_url}
+                        className="max-h-36 px-2 py-2"
+                        style={{ width: "100%",height: "auto" }}
+                      />
+                    </div>
+                    <div className="pb-2 px-2">
+                      <button onClick={() => handleModalOpen(key)}>
+                        {getData[key].name}
+                      </button>
+                    </div>
+                  </div>
+                ))}
+                </div>
+              </div>
+              {showModal && (
+                <div className="bg-gray-600 bg-opacity-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center">
+                  <div className="bg-black p-4 rounded border-2 border-yellow-400">
+                    <h3 className="text-xl text-white mb-2">Confirmation Dialog</h3>
+                    <p>このモンスターで遊ぶ？</p>
+                    <div className="mt-4 flex justify-end">
+                      <button
+                        onClick={handleModalClose}
+                        className="mr-2 bg-black text-white px-4 py-2 rounded"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={handleRegister}
+                        className="bg-black text-white px-4 py-2 rounded"
+                      >
+                        OK!
+                      </button>
+                    </div>
+                    {isLoading && <CircularProgress />}
+                  </div>
+                  {/* <div
+                    className=" absolute top-0 left-0 w-full h-screen"
+                    onClick={handleModalClose}
+                  /> */}
+                </div>
+              )}
+            </div>
+        </div>
+      </h2>
     </div>
   );
 };

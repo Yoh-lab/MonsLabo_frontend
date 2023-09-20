@@ -15,6 +15,8 @@ import SelectModePage from "./pages/SelectModePage";
 import SelectMonsterPage from "./pages/SelectMonsterPage";
 import TestPage from "./pages/TestPage";
 import SelectMakePage from "./pages/SelectMakePage";
+import ScrollTop from "./components/ScrollTop";
+import GeneratePage from "./pages/GeneratePage";
 // import TestPage from "./pages/TestPage";
 
 function App() {
@@ -29,11 +31,11 @@ function App() {
         palette: {
           mode: prefersDarkMode ? "dark" : "light",
           primary: {
-            main: "#df929b",
-            extraDark: "#c06d76",
+            main: "#f0fff2",
+            extraDark: "#a936e3",
             dark: "#c76672",
             light: "#ec939d",
-            extraLight: "#EBF4FB",
+            extraLight: "#d13bcc",
             alpha08: "#0077C714",
           },
           noticeRed: {
@@ -58,6 +60,7 @@ function App() {
           <div className="">
             {/* ルーティングを設定するためにBrowserRouterを使用 */}
             <BrowserRouter>
+            <ScrollTop />
               <Routes>
                 {/* ルートパスに対するルート要素としてSignInPageコンポーネントを設定 */}
                 <Route path={`/`} element={<HomePage />} />
@@ -66,6 +69,7 @@ function App() {
                 <Route path={`/selectMonster`} element={<SelectMonsterPage />} />
                 <Route path={`/selectMake`} element={<SelectMakePage />} />
                 <Route path={`/paint`} element={<PaintPage />} />
+                <Route path={`/generate`} element={<GeneratePage />} />
                 <Route path={`/make`} element={<MakePage />} />
                 <Route path={`/talk`} element={<TalkPage/>} />
                 <Route path={`/test`} element={<TestPage/>} />
